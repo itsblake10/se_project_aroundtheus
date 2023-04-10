@@ -1,0 +1,8 @@
+.page {
+  line-height: 1.2;
+  background: #000000;
+}
+
+.page__content {
+  margin: 0 200px 0 200px;
+}
