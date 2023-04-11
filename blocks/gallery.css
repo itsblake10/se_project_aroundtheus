@@ -11,14 +11,13 @@
   margin-top: 72px;
   margin-bottom: 67px;
   padding: 0;
-  min-width: 880px;
 }
 
 .gallery__card {
   display: flex;
   flex-direction: column;
   list-style: none;
-  width: 100%;
+  width: 282px;
   height: 361px;
   background: #ffffff;
   border-radius: 10px;
@@ -60,6 +59,7 @@
   width: 21px;
   height: 18px;
   padding: 0;
+  border: none;
 }
 
 .gallery__like-button:hover {
@@ -71,7 +71,7 @@
 @media screen and (max-width: 950px) {
   .gallery__cards {
     display: grid;
-    grid-template-rows: repeat(2, 361px);
+    justify-content: center;
     grid-template-columns: repeat(2, 282px);
     row-gap: 20px;
     column-gap: 17px;
@@ -83,14 +83,38 @@
 }
 
 /*Mobile*/
+@media screen and (max-width: 665px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gallery__cards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 20px;
+    margin-top: 36px;
+    margin-bottom: 48px;
+    list-style-type: none;
+    padding: 0;
+  }
+}
+
+/*Mobile*/
 @media screen and (max-width: 480px) {
   .gallery__cards {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-content: center;
     column-gap: 20px;
     margin-top: 36px;
     margin-bottom: 48px;
+    margin-left: auto;
+    margin-right: auto;
     list-style-type: none;
     padding: 0;
   }

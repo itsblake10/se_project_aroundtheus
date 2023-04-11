@@ -74,10 +74,31 @@
   opacity: 0.6;
   transition: 0.2s;
 }
-@media screen and (max-width: 480px) {
+
+@media screen and (max-width: 1100px) {
+  .profile {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .profile {
+  }
+}
+
+@media screen and (max-width: 665px) {
   .profile {
     flex-direction: column;
+    align-items: center;
+    align-content: center;
   }
+
+  .profile__name {
+    margin-right: 10px;
+    margin-bottom: 14px;
+  }
+
   .profile__info {
     display: flex;
     width: 100%;
@@ -89,6 +110,7 @@
   .profile__description {
     width: 100%;
     text-align: center;
+    justify-content: center;
     margin-bottom: 36px;
     font-size: 22px;
     line-height: 27px;
@@ -101,8 +123,16 @@
   }
 
   .profile__add-button {
+    background: url(../images/add-plus-button.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #ffffff;
     margin: 0;
-    width: 100%;
+    width: 282px;
+  }
+
+  .profile__edit-button {
+    padding-bottom: 5px;
   }
 
   .profile__title {
@@ -110,5 +140,57 @@
     line-height: 27px;
     text-align: center;
     margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+  }
+
+  .profile__name {
+    margin-right: 15.25px;
+    margin-bottom: 14px;
+    margin-left: 0;
+    padding: 0;
+    align-self: center;
+  }
+
+  .profile__info {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 26px;
+    justify-content: center;
+  }
+
+  .profile__description {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 36px;
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  .profile__image {
+    width: 168px;
+    height: 168px;
+    margin: 0;
+  }
+
+  .profile__title {
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .profile__info {
+    align-items: center;
   }
 }
