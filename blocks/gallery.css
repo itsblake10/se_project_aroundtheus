@@ -3,15 +3,13 @@
 
 .gallery__cards {
   display: grid;
-  grid-template-rows: repeat(autofit, 361px);
-  grid-template-columns: repeat(3, 282px);
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 282px);
   row-gap: 20px;
   column-gap: 17px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 211px;
-  margin-bottom: 67px;
   list-style-type: none;
+  margin-top: 72px;
+  margin-bottom: 67px;
   padding: 0;
   min-width: 880px;
 }
@@ -19,31 +17,29 @@
 .gallery__card {
   display: flex;
   flex-direction: column;
+  list-style: none;
   width: 100%;
   height: 361px;
   background: #ffffff;
   border-radius: 10px;
 }
 
-.gallery__card_image {
+.gallery__image {
   border-radius: 10px 10px 0px 0px;
   width: 100%;
   height: 282px;
   object-fit: cover;
 }
 
-.gallery__card_label {
+.gallery__label {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-left: 20px;
-  margin-right: 30px;
-  margin-top: auto;
-  margin-bottom: auto;
+  padding: 25px 20px 25px 20px;
 }
 
-.gallery__card_text {
+.gallery__text {
   font-family: "Inter", sans-serif;
   color: #000000;
   font-style: normal;
@@ -57,23 +53,44 @@
   overflow: hidden;
 }
 
-.gallery__card_icon {
+.gallery__like-button {
+  background: transparent url(../images/heart-icon.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 21px;
+  height: 18px;
+  padding: 0;
 }
 
-.gallery__card_icon:hover {
+.gallery__like-button:hover {
   opacity: 0.5;
   transition: 0.2s;
 }
 
-@media screen and (max-width: 900px) {
+/*Tablet*/
+@media screen and (max-width: 950px) {
   .gallery__cards {
     display: grid;
     grid-template-rows: repeat(2, 361px);
     grid-template-columns: repeat(2, 282px);
     row-gap: 20px;
     column-gap: 17px;
-    margin-top: 211px;
+    margin-top: 51px;
     margin-bottom: 67px;
+    list-style-type: none;
+    padding: 0;
+  }
+}
+
+/*Mobile*/
+@media screen and (max-width: 480px) {
+  .gallery__cards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    margin-top: 36px;
+    margin-bottom: 48px;
     list-style-type: none;
     padding: 0;
   }
