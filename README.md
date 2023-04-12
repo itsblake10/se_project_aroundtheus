@@ -1,11 +1,22 @@
 # Project 3: Around The U.S.
 
-### Overview
+# Overview
 
-- Intro
-- Figma
-- Images
+In this project i have followed the specs on a Figma file to create a responsive website using grid layout to fit different resolutions/devices including tablets and mobiles.
 
-**Intro**
+## Project features
 
-This project is made so all the elements are displayed correctly on popular screen sizes.
+- Semantic HTML5
+- Responsive CSS
+- Grid layout
+- Flexbox
+- Flat BEM
+
+## Languages used
+
+-HTML
+-CSS
+
+## Link to project
+
+[Link to Github Project](https://github.com/itsblake10/se_project_aroundtheus)
