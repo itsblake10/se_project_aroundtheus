@@ -14,8 +14,8 @@ In this project i have followed the specs on a Figma file to create a responsive
 
 ## Languages used
 
--HTML
--CSS
+- HTML
+- CSS
 
 ## Link to project
 
