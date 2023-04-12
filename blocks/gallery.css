@@ -67,7 +67,6 @@
   transition: 0.2s;
 }
 
-/*Tablet*/
 @media screen and (max-width: 950px) {
   .gallery__cards {
     display: grid;
@@ -82,8 +81,7 @@
   }
 }
 
-/*Mobile*/
-@media screen and (max-width: 665px) {
+@media screen and (max-width: 700px) {
   .content {
     display: flex;
     flex-direction: column;
@@ -105,6 +103,10 @@
 
 /*Mobile*/
 @media screen and (max-width: 480px) {
+  .gallery {
+    margin: 0;
+  }
+
   .gallery__cards {
     display: flex;
     flex-direction: column;
