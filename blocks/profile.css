@@ -49,6 +49,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 415px;
 }
 
 .profile__edit-button {
@@ -85,7 +86,6 @@
 }
 @media screen and (max-width: 800px) {
   .profile {
-    padding-bottom: 40px;
   }
 }
 
@@ -112,7 +112,9 @@
     width: 100%;
     text-align: center;
     font-size: 14px;
+    max-width: 415px;
   }
+
   .profile__add-button {
     background: transparent url(../images/add-plus-button.svg) center no-repeat;
     margin: 0;
@@ -120,6 +122,7 @@
     max-width: 282px;
     max-height: 50px;
   }
+
   .profile__edit-button {
     max-width: 18px;
     max-height: 18px;
@@ -127,6 +130,7 @@
   .profile__title {
     font-size: 22px;
     line-height: 1.21;
+    width: 196px;
   }
 }
 
