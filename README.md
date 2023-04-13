@@ -19,4 +19,4 @@ In this project i have followed the specs on a Figma file to create a responsive
 
 ## Link to project
 
-[Link to Github Project](https://github.com/itsblake10/se_project_aroundtheus)
+[Link to Github Project](https://itsblake10.github.io/se_project_aroundtheus)
