@@ -63,10 +63,11 @@
   opacity: 0.5;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 319px) {
   .gallery {
     margin: 0;
   }
+
   .gallery__cards {
     padding-top: 36px;
   }
