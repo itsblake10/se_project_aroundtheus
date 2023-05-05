@@ -117,7 +117,7 @@
   right: -40px;
 }
 
-.modal__close:hover {
+.modal__close-button:hover {
   opacity: 0.6;
   cursor: pointer;
 }

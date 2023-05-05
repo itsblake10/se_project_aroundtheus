@@ -25,6 +25,7 @@ const initialCards = [
   },
 ];
 
+/*ELEMENTS*/
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const modalCloseButton = document.querySelector("#modal-close-button");
@@ -35,11 +36,36 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
+const galleryListEl = document.querySelector(".gallery__cards");
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
 
+/*FUNCTIONS*/
 function closePopup() {
   profileEditModal.classList.remove("modal__opened");
 }
 
+function handleProfileEditSubmit(e) {
+  e.preventDefault();
+  profileTitle.textContent = profileTitleInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  closePopup();
+}
+
+function getCardElement(cardData) {
+  const cardElement = cardTemplate.cloneNode(true);
+
+  const galleryTitleEl = cardElement.querySelector(".gallery__title");
+  const galleryImageEl = cardElement.querySelector(".gallery__image");
+
+  galleryTitleEl.textContent = cardData.name;
+  galleryImageEl.src = cardData.link;
+  galleryImageEl.alt.textContent = cardData.name;
+
+  return cardElement;
+}
+
+/*EVENT LISTENERS*/
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -47,13 +73,11 @@ profileEditButton.addEventListener("click", () => {
   profileEditModal.classList.add("modal__opened");
 });
 
-modalCloseButton.addEventListener("click", () => {
-  profileEditModal.classList.remove("modal__opened");
-});
+modalCloseButton.addEventListener("click", closePopup);
 
-profileEditForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closePopup();
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  galleryListEl.append(cardElement);
 });
