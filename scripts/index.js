@@ -42,7 +42,7 @@ const cardTemplate =
 
 /*FUNCTIONS*/
 function closePopup() {
-  profileEditModal.classList.remove("modal__opened");
+  profileEditModal.classList.remove("modal_opened");
 }
 
 function handleProfileEditSubmit(e) {
@@ -60,7 +60,7 @@ function getCardElement(cardData) {
 
   galleryTitleEl.textContent = cardData.name;
   galleryImageEl.src = cardData.link;
-  galleryImageEl.alt.textContent = cardData.name;
+  galleryImageEl.alt = cardData.name;
 
   return cardElement;
 }
@@ -70,7 +70,7 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 
-  profileEditModal.classList.add("modal__opened");
+  profileEditModal.classList.add("modal_opened");
 });
 
 modalCloseButton.addEventListener("click", closePopup);

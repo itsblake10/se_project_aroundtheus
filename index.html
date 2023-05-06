@@ -49,8 +49,12 @@
 
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close-button" id="modal-close-button"></button>
-        <p class="modal__heading">Edit profile</p>
+        <button
+          class="modal__close-button"
+          id="modal-close-button"
+          type="button"
+        ></button>
+        <h2 class="modal__heading">Edit profile</h2>
         <form class="modal__form">
           <input
             type="text"
@@ -60,13 +64,14 @@
             placeholder="Name"
           />
           <input
+            required
             type="text"
             name="description"
             id="profile-description-input"
             class="modal__input-description"
             placeholder="About me"
           />
-          <button class="modal__save-button">Save</button>
+          <button class="modal__save-button" type="submit">Save</button>
         </form>
       </div>
     </div>
@@ -80,6 +85,6 @@
       </li>
     </template>
 
-    <script src="scripts/index.js"></script>
+    <script src="scripts/index.js" defer></script>
   </body>
 </html>
