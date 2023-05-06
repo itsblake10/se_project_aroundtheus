@@ -18,8 +18,8 @@
 .modal__container {
   background-color: #fff;
   border-radius: 10px;
-  width: 430px;
-  height: 330px;
+  min-width: 430px;
+  max-height: 330px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -27,8 +27,8 @@
 
 .modal__heading {
   color: black;
-  width: 330px;
-  height: 23px;
+  max-width: 330px;
+  max-height: 23px;
   margin-left: 36px;
   margin-top: 34px;
   margin-bottom: 54px;
@@ -42,15 +42,16 @@
 .modal__form {
   display: flex;
   flex-direction: column;
+  min-width: 358px;
+  align-self: center;
 }
 
-.modal__input-name {
+.modal__input {
   border-top: none;
   border-right: none;
   border-bottom: 1px solid black;
   border-left: none;
   border-color: rgba(0, 0, 0, 0.2);
-  max-width: 358px;
   max-height: 14px;
   margin-left: 36px;
   margin-right: 36px;
@@ -61,43 +62,32 @@
   font-size: 14px;
   line-height: 17px;
   outline: none;
+  width: 100%;
+  align-self: center;
 }
 
-.modal__input-description {
-  border-top: none;
-  border-right: none;
-  border-bottom: 1px solid black;
-  border-left: none;
-  border-color: rgba(0, 0, 0, 0.2);
-  max-width: 358px;
-  max-height: 14px;
-  margin-left: 36px;
-  margin-right: 36px;
+.modal__input:last-of-type {
   margin-top: 29px;
-  padding-bottom: 13px;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  outline: none;
 }
 
 .modal__save-button {
   background-color: black;
+  border: none;
   color: white;
   border-style: none;
-  width: 358px;
-  height: 50.15px;
+  width: 100%;
+  min-height: 50.15px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 48px;
-  font-family: "Inter";
+  margin-bottom: 36px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   text-align: center;
+  align-self: center;
 }
 
 .modal__save-button:hover {
@@ -110,8 +100,8 @@
 .modal__close-button {
   background: transparent url(../images/close-Icon.svg) center no-repeat;
   border: none;
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   position: absolute;
   top: -40px;
   right: -40px;
@@ -130,41 +120,44 @@
   }
 
   .modal__container {
-    width: 282px;
-    height: 322px;
+    min-width: 282px;
+    max-height: 322px;
     margin-left: 19px;
     margin-right: 19px;
   }
 
+  .modal__form {
+    min-width: 238px;
+  }
+
   .modal__heading {
-    width: 238px;
-    height: 22px;
+    max-width: 100%;
+    min-height: 22px;
     font-size: 18px;
     line-height: 22px;
     margin: 25px 22px 75px 22px;
   }
 
-  .modal__input-name {
-    margin-left: 22px;
-    margin-right: 22px;
-  }
-
-  .modal__input-description {
+  .modal__input {
+    width: 238px;
     margin-left: 22px;
     margin-right: 22px;
   }
 
   .modal__save-button {
     width: 238px;
-    height: 46px;
+    min-height: 46px;
     font-size: 14px;
     line-height: 17px;
+    margin-bottom: 25px;
+    margin-left: 22px;
+    margin-right: 22px;
   }
 
   .modal__close-button {
     background-size: contain;
-    width: 26px;
-    height: 26px;
+    min-width: 26px;
+    min-height: 26px;
     top: -50px;
     right: 8px;
   }
