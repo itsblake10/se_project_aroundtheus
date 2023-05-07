@@ -3,6 +3,8 @@
   align-items: center;
   padding-top: 40px;
   gap: 10px;
+  padding-left: 19px;
+  padding-right: 19px;
 }
 
 .profile__info {
