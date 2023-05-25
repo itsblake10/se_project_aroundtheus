@@ -34,7 +34,11 @@
             ></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            class="profile__add-button"
+            type="button"
+            id="profile-add-button"
+          ></button>
         </section>
 
         <section class="gallery page__section">
@@ -47,11 +51,12 @@
       <p class="footer__text">© 2022 Around The U.S.</p>
     </footer>
 
+    <!--EDIT MODAL-->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button
           class="modal__close-button"
-          id="modal-close-button"
+          id="modal-edit-close-button"
           type="button"
         ></button>
         <h2 class="modal__heading">Edit profile</h2>
@@ -75,6 +80,37 @@
         </form>
       </div>
     </div>
+
+    <!--ADD MODAL-->
+    <div class="modal" id="profile-add-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close-button"
+          id="modal-add-close-button"
+          type="button"
+        ></button>
+        <h2 class="modal__heading">New Place</h2>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="title"
+            id="profile-title-input"
+            class="modal__input"
+            placeholder="Title"
+          />
+          <input
+            required
+            type="text"
+            name="url"
+            id="profile-description-input"
+            class="modal__input"
+            placeholder="Image link"
+          />
+          <button class="modal__save-button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="gallery__card">
         <img src="" alt="" class="gallery__image" />
