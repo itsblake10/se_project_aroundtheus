@@ -94,7 +94,7 @@
           <input
             type="text"
             name="title"
-            id="add-card-title-input"
+            id="card-title-input"
             class="modal__input"
             placeholder="Title"
           />
@@ -102,7 +102,7 @@
             required
             type="text"
             name="url"
-            id="add-card-url-input"
+            id="card-url-input"
             class="modal__input"
             placeholder="Image link"
           />
@@ -113,6 +113,7 @@
 
     <template id="card-template">
       <li class="gallery__card">
+        <button type="button" class="gallery__delete-button"></button>
         <img src="" alt="" class="gallery__image" />
         <div class="gallery__description">
           <h2 class="gallery__title"></h2>
