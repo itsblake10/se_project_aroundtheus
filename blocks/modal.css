@@ -9,6 +9,7 @@
   display: none;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .modal_opened {
@@ -111,6 +112,26 @@
   opacity: 0.6;
   transition: 0.2s ease-in-out;
   cursor: pointer;
+}
+
+#image-modal {
+  align-items: center;
+}
+
+.modal__image-preview {
+  max-width: 816px;
+  object-fit: cover;
+  align-items: start;
+}
+
+.modal__image-text {
+  height: 540px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
 }
 
 @media screen and (max-width: 620px) {

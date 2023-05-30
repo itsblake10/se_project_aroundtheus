@@ -51,8 +51,6 @@ const cardUrlInput = document.querySelector("#card-url-input");
 const modalImageCloseButton = document.querySelector(
   "#modal-image-close-button"
 );
-const ImageModal = document.querySelector("#image-modal");
-const modalImagePreview = document.querySelector(".modal__image-preview");
 
 //*CARDS*//
 const galleryListEl = document.querySelector(".gallery__cards");
@@ -99,6 +97,10 @@ function getCardElement(cardData) {
   const likeButton = cardElement.querySelector(".gallery__like-button");
   const deleteButton = cardElement.querySelector(".gallery__delete-button");
 
+  const ImageModal = document.querySelector("#image-modal");
+  const modalImagePreview = document.querySelector(".modal__image-preview");
+  const modalImagePreviewText = document.querySelector(".modal__image-text");
+
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("gallery__like-button_active");
   });
@@ -107,7 +109,15 @@ function getCardElement(cardData) {
     cardElement.remove(cardData);
   });
 
-  galleryImageEl.addEventListener("click", () => openPopup(ImageModal));
+  galleryImageEl.addEventListener("click", () => {
+    modalImagePreview.src = cardData.link;
+    modalImagePreview.alt = cardData.name;
+    modalImagePreviewText.textContent = cardData.name;
+
+    ImageModal.classList.add("modal_opened");
+  });
+
+  ImageModal.addEventListener("click", () => closePopup(ImageModal));
 
   galleryTitleEl.textContent = cardData.name;
   galleryImageEl.src = cardData.link;
