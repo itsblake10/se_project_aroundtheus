@@ -1,3 +1,7 @@
+<!-- ----------------------------------------------------------------------- -->
+<!--                               INDEX.HTML                                -->
+<!-- ----------------------------------------------------------------------- -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,7 +22,12 @@
         />
       </header>
 
+      <!-- ----------------------------------------------------------------------- -->
+      <!--                                 CONTENT                                 -->
+      <!-- ----------------------------------------------------------------------- -->
+
       <main class="content">
+        <!-- ------------------------------- PROFILE ------------------------------- -->
         <section class="profile page__section">
           <img
             src="./images/jacques-cousteau.jpg"
@@ -41,17 +50,23 @@
           ></button>
         </section>
 
+        <!-- ------------------------------- GALLERY ------------------------------- -->
         <section class="gallery page__section">
           <ul class="gallery__cards"></ul>
         </section>
       </main>
     </div>
+    <!-- ----------------------------------------------------------------------- -->
 
     <footer class="footer page__section">
       <p class="footer__text">© 2022 Around The U.S.</p>
     </footer>
 
-    <!--EDIT MODAL-->
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                                 MODALS                                  -->
+    <!-- ----------------------------------------------------------------------- -->
+
+    <!-- ----------------------------- EDIT MODAL ------------------------------ -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button
@@ -81,7 +96,7 @@
       </div>
     </div>
 
-    <!--ADD MODAL-->
+    <!-- ------------------------------ ADD MODAL ------------------------------ -->
     <div class="modal" id="profile-add-modal">
       <div class="modal__container">
         <button
@@ -111,9 +126,9 @@
       </div>
     </div>
 
-    <!--PICTURE MODAL-->
+    <!-- ---------------------------- PICTURE MODAL ---------------------------- -->
     <div class="modal" id="image-modal">
-      <div class="modal__container">
+      <div class="modal__container-image">
         <button
           class="modal__close-button"
           id="modal-image-close-button"
@@ -124,6 +139,9 @@
       </div>
     </div>
 
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                              CARD TEMPLATE                              -->
+    <!-- ----------------------------------------------------------------------- -->
     <template id="card-template">
       <li class="gallery__card">
         <button type="button" class="gallery__delete-button"></button>
@@ -135,6 +153,8 @@
       </li>
     </template>
 
+    <!-- ----------------------------- JAVASCRIPT ------------------------------ -->
     <script src="scripts/index.js" defer></script>
+    <!-- ----------------------------------------------------------------------- -->
   </body>
 </html>

@@ -1,3 +1,7 @@
+/* -------------------------------------------------------------------------- */
+/*                                    MODAL                                   */
+/* -------------------------------------------------------------------------- */
+
 .modal {
   position: fixed;
   top: 0;
@@ -5,15 +9,20 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.2s linear;
   align-items: center;
   justify-content: center;
+  z-index: 999;
   cursor: pointer;
 }
 
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.2s, opacity 0.2s linear;
 }
 
 .modal__container {
@@ -114,25 +123,35 @@
   cursor: pointer;
 }
 
-#image-modal {
-  align-items: center;
+.modal__container-image {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .modal__image-preview {
-  max-width: 816px;
-  object-fit: cover;
-  align-items: start;
+  max-width: 75vw;
+  max-height: 75vh;
 }
 
 .modal__image-text {
-  height: 540px;
+  height: 100%;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   color: #ffffff;
+  padding-top: 10px;
+  padding-bottom: 0;
+  margin: 0;
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                MEDIA QUERIES                               */
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------------- 620px --------------------------------- */
 
 @media screen and (max-width: 620px) {
   .modal {
