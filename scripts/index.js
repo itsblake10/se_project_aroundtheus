@@ -56,11 +56,11 @@ const cardUrlInput = document.querySelector("#card-url-input");
 const modalImageCloseButton = document.querySelector(
   "#modal-image-close-button"
 );
+const imageModal = document.querySelector("#image-modal");
 
 /* ----------------------------------- CARDS ---------------------------------- */
 
 const galleryListEl = document.querySelector(".gallery__cards");
-const galleryImageEl = document.querySelector(".gallery__image");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
@@ -106,8 +106,6 @@ function getCardElement(cardData) {
   const galleryImageEl = cardElement.querySelector(".gallery__image");
   const likeButton = cardElement.querySelector(".gallery__like-button");
   const deleteButton = cardElement.querySelector(".gallery__delete-button");
-
-  const ImageModal = document.querySelector("#image-modal");
   const modalImagePreview = document.querySelector(".modal__image-preview");
   const modalImagePreviewText = document.querySelector(".modal__image-text");
 
@@ -124,10 +122,8 @@ function getCardElement(cardData) {
     modalImagePreview.alt = cardData.name;
     modalImagePreviewText.textContent = cardData.name;
 
-    ImageModal.classList.add("modal_opened");
+    openPopup(imageModal);
   });
-
-  ImageModal.addEventListener("click", () => closePopup(ImageModal));
 
   galleryTitleEl.textContent = cardData.name;
   galleryImageEl.src = cardData.link;
@@ -151,13 +147,13 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 
-  profileEditModal.classList.add("modal_opened");
+  openPopup(profileEditModal);
 });
 
 modalEditCloseButton.addEventListener("click", () =>
   closePopup(profileEditModal)
 );
-profileEditButton.addEventListener("click", () => openPopup(profileEditModal));
+
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 /* -------------------------------- ADD CARD -------------------------------- */
@@ -169,9 +165,8 @@ profileAddButton.addEventListener("click", () => openPopup(profileAddModal));
 
 profileAddForm.addEventListener("submit", handleProfileAddSubmit);
 
-/* ------------------------------ PREVIEW IMAGE ----------------------------- */
-
-modalImageCloseButton.addEventListener("click", () => closePopup(ImageModal));
+/* -------------------------------- PREVIEW IMAGE -------------------------------- */
+modalImageCloseButton.addEventListener("click", () => closePopup(imageModal));
 
 /* -------------------------------------------------------------------------- */
 /*                                RENDER CARDS                                */
