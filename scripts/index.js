@@ -94,6 +94,9 @@ function handleProfileAddSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, galleryListEl);
+  const addForm = document.querySelector("#modal-add-form");
+  addForm.reset();
+
   closePopup(profileAddModal);
 }
 
