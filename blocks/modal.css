@@ -29,7 +29,7 @@
   background-color: #fff;
   border-radius: 10px;
   min-width: 430px;
-  max-height: 330px;
+  max-height: 370px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -59,7 +59,7 @@
 .modal__input {
   border-top: none;
   border-right: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid;
   border-left: none;
   border-color: rgba(0, 0, 0, 0.2);
   max-height: 14px;
@@ -80,7 +80,28 @@
   margin-top: 29px;
 }
 
-.modal__save-button {
+.modal__error_visible {
+}
+
+.modal__input_type_error {
+  border-color: rgba(255, 0, 0);
+}
+
+.modal__error {
+  padding-top: 5px;
+  color: #ff0000;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-overflow: ellipsis;
+  overflow: auto;
+  max-width: 358px;
+  max-height: 20px;
+}
+
+.modal__submit-button {
   background-color: black;
   border: none;
   color: white;
@@ -100,11 +121,27 @@
   align-self: center;
 }
 
-.modal__save-button:hover {
+.modal__submit-button:hover {
   opacity: 0.8;
   transition: 0.2s ease-in-out;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.modal__submit-button_disabled {
+  color: #000000;
+  opacity: 0.2;
+  background-color: #fff;
+  border: 1px solid #000000;
+  border-radius: 2px;
+}
+
+.modal__submit-button_disabled:hover {
+  color: #000000;
+  opacity: 0.2;
+  background-color: #fff;
+  border: 1px solid #000000;
+  border-radius: 2px;
 }
 
 .modal__close-button {
@@ -185,7 +222,7 @@
     margin-right: 22px;
   }
 
-  .modal__save-button {
+  .modal__submit-button {
     width: 100%;
     min-height: 46px;
     font-size: 14px;
