@@ -195,21 +195,21 @@ imageModal.addEventListener("click", function (event) {
 
 /* ------------------------------ EDIT PROFILE ------------------------------ */
 window.addEventListener("keydown", function (event) {
-  if ((event.key = 27)) {
+  if (event.key === "Escape") {
     closePopup(profileEditModal);
   }
 });
 
 /* -------------------------------- ADD CARD -------------------------------- */
 window.addEventListener("keydown", function (event) {
-  if ((event.key = 27)) {
+  if (event.key === "Escape") {
     closePopup(profileAddModal);
   }
 });
 
 /* -------------------------------- PREVIEW IMAGE -------------------------------- */
 window.addEventListener("keydown", function (event) {
-  if ((event.key = 27)) {
+  if (event.key === "Escape") {
     closePopup(imageModal);
   }
 });
