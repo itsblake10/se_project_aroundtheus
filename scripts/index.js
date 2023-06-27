@@ -29,6 +29,8 @@ const initialCards = [
 /*                                  ELEMENTS                                  */
 /* -------------------------------------------------------------------------- */
 
+const modal = document.querySelector(".modal");
+
 /* ------------------------------ EDIT PROFILE ------------------------------ */
 
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -157,6 +159,12 @@ modalEditCloseButton.addEventListener("click", () =>
   closePopup(profileEditModal)
 );
 
+profileEditModal.addEventListener("click", function (event) {
+  if (event.target.matches("#profile-edit-modal")) {
+    closePopup(profileEditModal);
+  }
+});
+
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 /* -------------------------------- ADD CARD -------------------------------- */
@@ -166,10 +174,45 @@ modalAddCloseButton.addEventListener("click", () =>
 );
 profileAddButton.addEventListener("click", () => openPopup(profileAddModal));
 
+profileAddModal.addEventListener("click", function (event) {
+  if (event.target.matches("#profile-add-modal")) {
+    closePopup(profileAddModal);
+  }
+});
+
 profileAddForm.addEventListener("submit", handleProfileAddSubmit);
 
 /* -------------------------------- PREVIEW IMAGE -------------------------------- */
 modalImageCloseButton.addEventListener("click", () => closePopup(imageModal));
+
+imageModal.addEventListener("click", function (event) {
+  if (event.target.matches("#image-modal")) {
+    closePopup(imageModal);
+  }
+});
+
+/* -------------------------------- KEY DOWN -------------------------------- */
+
+/* ------------------------------ EDIT PROFILE ------------------------------ */
+window.addEventListener("keydown", function (event) {
+  if ((event.key = 27)) {
+    closePopup(profileEditModal);
+  }
+});
+
+/* -------------------------------- ADD CARD -------------------------------- */
+window.addEventListener("keydown", function (event) {
+  if ((event.key = 27)) {
+    closePopup(profileAddModal);
+  }
+});
+
+/* -------------------------------- PREVIEW IMAGE -------------------------------- */
+window.addEventListener("keydown", function (event) {
+  if ((event.key = 27)) {
+    closePopup(imageModal);
+  }
+});
 
 /* -------------------------------------------------------------------------- */
 /*                                RENDER CARDS                                */
