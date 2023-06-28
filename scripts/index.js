@@ -29,8 +29,6 @@ const initialCards = [
 /*                                  ELEMENTS                                  */
 /* -------------------------------------------------------------------------- */
 
-const modal = document.querySelector(".modal");
-
 /* ------------------------------ EDIT PROFILE ------------------------------ */
 
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -60,6 +58,8 @@ const modalImageCloseButton = document.querySelector(
 );
 const imageModal = document.querySelector("#image-modal");
 
+/* ---------------------------------- MODAL/POPUP --------------------------------- */
+
 /* ----------------------------------- CARDS ---------------------------------- */
 
 const galleryListEl = document.querySelector(".gallery__cards");
@@ -74,10 +74,12 @@ const cardTemplate =
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", escClose);
 }
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", escClose);
 }
 
 /* --------------------------------- BUTTONS -------------------------------- */
@@ -96,8 +98,13 @@ function handleProfileAddSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, galleryListEl);
-  const addForm = document.querySelector("#modal-add-form");
-  addForm.reset();
+  profileAddForm.reset();
+
+  const addSubmitButton = profileAddModal.querySelector(
+    ".modal__submit-button"
+  );
+
+  addSubmitButton.classList.toggle("modal__submit-button_disabled");
 
   closePopup(profileAddModal);
 }
@@ -159,7 +166,7 @@ modalEditCloseButton.addEventListener("click", () =>
   closePopup(profileEditModal)
 );
 
-profileEditModal.addEventListener("click", function (event) {
+profileEditModal.addEventListener("mousedown", function (event) {
   if (event.target.matches("#profile-edit-modal")) {
     closePopup(profileEditModal);
   }
@@ -169,12 +176,14 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 /* -------------------------------- ADD CARD -------------------------------- */
 
-modalAddCloseButton.addEventListener("click", () =>
-  closePopup(profileAddModal)
-);
+modalAddCloseButton.addEventListener("click", () => {
+  profileAddForm.reset();
+  closePopup(profileAddModal);
+});
+
 profileAddButton.addEventListener("click", () => openPopup(profileAddModal));
 
-profileAddModal.addEventListener("click", function (event) {
+profileAddModal.addEventListener("mousedown", function (event) {
   if (event.target.matches("#profile-add-modal")) {
     closePopup(profileAddModal);
   }
@@ -185,34 +194,19 @@ profileAddForm.addEventListener("submit", handleProfileAddSubmit);
 /* -------------------------------- PREVIEW IMAGE -------------------------------- */
 modalImageCloseButton.addEventListener("click", () => closePopup(imageModal));
 
-imageModal.addEventListener("click", function (event) {
+imageModal.addEventListener("mousedown", function (event) {
   if (event.target.matches("#image-modal")) {
     closePopup(imageModal);
   }
 });
 
 /* -------------------------------- KEY DOWN -------------------------------- */
-
-/* ------------------------------ EDIT PROFILE ------------------------------ */
-window.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
-    closePopup(profileEditModal);
+function escClose(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".modal_opened");
+    closePopup(openedPopup);
   }
-});
-
-/* -------------------------------- ADD CARD -------------------------------- */
-window.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
-    closePopup(profileAddModal);
-  }
-});
-
-/* -------------------------------- PREVIEW IMAGE -------------------------------- */
-window.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
-    closePopup(imageModal);
-  }
-});
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                RENDER CARDS                                */

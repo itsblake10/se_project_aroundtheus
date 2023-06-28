@@ -2,7 +2,7 @@
 
 function showInputError(formEl, inputEl, validationConfig) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  inputEl.classList.add("modal__input_type_error");
+  inputEl.classList.add("inputErrorClass");
   errorMessageEl.textContent = inputEl.validationMessage;
   errorMessageEl.classList.add("modal__error_visible");
 }
