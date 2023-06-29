@@ -74,12 +74,12 @@ const cardTemplate =
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", escClose);
+  document.addEventListener("keydown", closeWithEsc);
 }
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", escClose);
+  document.removeEventListener("keydown", closeWithEsc);
 }
 
 /* --------------------------------- BUTTONS -------------------------------- */
@@ -104,7 +104,8 @@ function handleProfileAddSubmit(e) {
     ".modal__submit-button"
   );
 
-  addSubmitButton.classList.toggle("modal__submit-button_disabled");
+  addSubmitButton.classList.add("modal__submit-button_disabled");
+  addSubmitButton.disabled = true;
 
   closePopup(profileAddModal);
 }
@@ -177,7 +178,6 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 /* -------------------------------- ADD CARD -------------------------------- */
 
 modalAddCloseButton.addEventListener("click", () => {
-  profileAddForm.reset();
   closePopup(profileAddModal);
 });
 
@@ -201,7 +201,7 @@ imageModal.addEventListener("mousedown", function (event) {
 });
 
 /* -------------------------------- KEY DOWN -------------------------------- */
-function escClose(evt) {
+function closeWithEsc(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".modal_opened");
     closePopup(openedPopup);
