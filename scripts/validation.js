@@ -1,34 +1,34 @@
 /* ------------------------------- Show Error ------------------------------- */
 
-function showInputError(formEl, inputEl, validationConfig) {
+function showInputError(formEl, inputEl, options) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  inputEl.classList.add(validationConfig.inputErrorClass);
+  inputEl.classList.add(options.inputErrorClass);
   errorMessageEl.textContent = inputEl.validationMessage;
-  errorMessageEl.classList.add(validationConfig.errorClass);
+  errorMessageEl.classList.add(options.errorClass);
 }
 
 /* ------------------------------- Hide Error ------------------------------- */
 
-function hideInputError(formEl, inputEl, validationConfig) {
+function hideInputError(formEl, inputEl, options) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  inputEl.classList.remove(validationConfig.inputErrorClass);
+  inputEl.classList.remove(options.inputErrorClass);
   errorMessageEl.textContent = "";
-  errorMessageEl.classList.remove(validationConfig.errorClass);
+  errorMessageEl.classList.remove(options.errorClass);
 }
 
 /* ----------------------------- Check Validity ----------------------------- */
 
-function checkInputValidity(formEl, inputEl, validationConfig) {
+function checkInputValidity(formEl, inputEl, options) {
   if (!inputEl.validity.valid) {
-    return showInputError(formEl, inputEl, validationConfig);
+    return showInputError(formEl, inputEl, options);
   }
 
-  hideInputError(formEl, inputEl, validationConfig);
+  hideInputError(formEl, inputEl, options);
 }
 
 /* ---------------------- Toggle Submit Button Inactive/Active --------------------- */
 
-function toggleButtonState(inputEls, submitButton, validationConfig) {
+function toggleButtonState(inputEls, submitButton, options) {
   let foundInvalid = false;
 
   inputEls.forEach((inputEl) => {
@@ -38,41 +38,35 @@ function toggleButtonState(inputEls, submitButton, validationConfig) {
   });
 
   if (foundInvalid) {
-    submitButton.classList.add(validationConfig.inactiveButtonClass);
+    submitButton.classList.add(options.inactiveButtonClass);
     return (submitButton.disabled = true);
   }
 
-  submitButton.classList.remove(validationConfig.inactiveButtonClass);
+  submitButton.classList.remove(options.inactiveButtonClass);
   submitButton.disabled = false;
 }
 
-function setEventListeners(formEl, validationConfig) {
-  const inputEls = Array.from(
-    formEl.querySelectorAll(validationConfig.inputSelector)
-  );
-  const submitButton = formEl.querySelector(
-    validationConfig.submitButtonSelector
-  );
+function setEventListeners(formEl, options) {
+  const inputEls = Array.from(formEl.querySelectorAll(options.inputSelector));
+  const submitButton = formEl.querySelector(options.submitButtonSelector);
 
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
-      checkInputValidity(formEl, inputEl, validationConfig);
-      toggleButtonState(inputEls, submitButton);
+      checkInputValidity(formEl, inputEl, options);
+      toggleButtonState(inputEls, submitButton, options);
     });
   });
 }
 
-function enableValidation(validationConfig) {
-  const formEls = Array.from(
-    document.querySelectorAll(validationConfig.formSelector)
-  );
+function enableValidation(options) {
+  const formEls = Array.from(document.querySelectorAll(options.formSelector));
 
   formEls.forEach((formEl) => {
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
     });
 
-    setEventListeners(formEl, validationConfig);
+    setEventListeners(formEl, options);
   });
 }
 
@@ -82,9 +76,9 @@ const validationConfig = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__submit-button",
-  inactiveButtonClass: ".modal__submit-button_disabled",
-  inputErrorClass: ".modal__input_type_error",
-  errorClass: ".modal__error_visible",
+  inactiveButtonClass: "modal__submit-button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
 };
 
 enableValidation(validationConfig);
