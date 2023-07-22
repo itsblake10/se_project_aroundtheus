@@ -1,4 +1,6 @@
-const initialCards = [
+import Card from "../components/card.js";
+
+const cardData = [
   {
     name: "Yosmite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -56,15 +58,25 @@ const cardUrlInput = document.querySelector("#card-url-input");
 const modalImageCloseButton = document.querySelector(
   "#modal-image-close-button"
 );
-const imageModal = document.querySelector("#image-modal");
 
-/* ---------------------------------- MODAL/POPUP --------------------------------- */
+export const imageModal = document.querySelector("#image-modal");
 
 /* ----------------------------------- CARDS ---------------------------------- */
 
 const galleryListEl = document.querySelector(".gallery__cards");
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+
+/* ----------------------------------- WIP ---------------------------------- */
+cardData.forEach((cardData) => {
+  renderCard(cardData);
+});
+
+function renderCard(cardData) {
+  const card = new Card(cardData, "#card-template");
+
+  const cardElement = card.getTemplate();
+
+  galleryListEl.prepend(cardElement);
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
@@ -72,15 +84,7 @@ const cardTemplate =
 
 /* -------------------------- OPEN AND CLOSE MODAL -------------------------- */
 
-function openPopup(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", closeWithEsc);
-}
-
-function closePopup(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closeWithEsc);
-}
+import { openPopup, closePopup } from "../utils/utils.js";
 
 /* --------------------------------- BUTTONS -------------------------------- */
 
@@ -112,43 +116,43 @@ function handleProfileAddSubmit(e) {
 
 /* ---------------------------------- CARDS --------------------------------- */
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
+//function getCardElement(cardData) {
+//const cardElement = cardTemplate.cloneNode(true);
 
-  const galleryTitleEl = cardElement.querySelector(".gallery__title");
-  const galleryImageEl = cardElement.querySelector(".gallery__image");
-  const likeButton = cardElement.querySelector(".gallery__like-button");
-  const deleteButton = cardElement.querySelector(".gallery__delete-button");
-  const modalImagePreview = document.querySelector(".modal__image-preview");
-  const modalImagePreviewText = document.querySelector(".modal__image-text");
+//const galleryTitleEl = cardElement.querySelector(".gallery__title");
+//const galleryImageEl = cardElement.querySelector(".gallery__image");
+//const likeButton = cardElement.querySelector(".gallery__like-button");
+//const deleteButton = cardElement.querySelector(".gallery__delete-button");
+//const modalImagePreview = document.querySelector(".modal__image-preview");
+//const modalImagePreviewText = document.querySelector(".modal__image-text");
 
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("gallery__like-button_active");
-  });
+//likeButton.addEventListener("click", () => {
+//likeButton.classList.toggle("gallery__like-button_active");
+// });
 
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove(cardData);
-  });
+//deleteButton.addEventListener("click", () => {
+//cardElement.remove(cardData);
+// });
 
-  galleryImageEl.addEventListener("click", () => {
-    modalImagePreview.src = cardData.link;
-    modalImagePreview.alt = cardData.name;
-    modalImagePreviewText.textContent = cardData.name;
+//galleryImageEl.addEventListener("click", () => {
+//modalImagePreview.src = cardData.link;
+//modalImagePreview.alt = cardData.name;
+// modalImagePreviewText.textContent = cardData.name;
 
-    openPopup(imageModal);
-  });
+//  openPopup(imageModal);
+// });
 
-  galleryTitleEl.textContent = cardData.name;
-  galleryImageEl.src = cardData.link;
-  galleryImageEl.alt = cardData.name;
+//galleryTitleEl.textContent = cardData.name;
+//galleryImageEl.src = cardData.link;
+//galleryImageEl.alt = cardData.name;
 
-  return cardElement;
-}
+// return cardElement;
+//}
 
-function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
-  galleryListEl.prepend(cardElement);
-}
+//function renderCard(cardData) {
+//const cardElement = card.generateCard();
+//galleryListEl.prepend(cardElement);
+//}
 
 /* -------------------------------------------------------------------------- */
 /*                               EVENT LISTENERS                              */
@@ -199,17 +203,3 @@ imageModal.addEventListener("mousedown", function (event) {
     closePopup(imageModal);
   }
 });
-
-/* -------------------------------- KEY DOWN -------------------------------- */
-function closeWithEsc(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".modal_opened");
-    closePopup(openedPopup);
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/*                                RENDER CARDS                                */
-/* -------------------------------------------------------------------------- */
-
-initialCards.forEach((cardData) => renderCard(cardData, galleryListEl));
