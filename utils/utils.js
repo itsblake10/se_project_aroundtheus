@@ -1,10 +1,8 @@
 /* ---------------------------- OPEN/CLOSE POPUP ---------------------------- */
-export { openPopup, closePopup };
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeWithEsc);
-  document.addEventListener("click");
 }
 
 function closePopup(modal) {
@@ -13,7 +11,6 @@ function closePopup(modal) {
 }
 
 /* --------------------------- CLOSE WITH ESC KEY --------------------------- */
-export { closeWithEsc, openedPopup };
 
 const openedPopup = document.querySelector(".modal_opened");
 
@@ -22,3 +19,7 @@ function closeWithEsc(evt) {
     closePopup(openedPopup);
   }
 }
+
+export { openPopup, closePopup };
+
+export { closeWithEsc, openedPopup };

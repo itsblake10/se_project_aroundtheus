@@ -1,5 +1,13 @@
 import Card from "../components/card.js";
 
+import FormValidator from "../components/formvalidator.js";
+
+import validationConfig from "../components/formvalidator.js";
+
+import { openPopup, closePopup } from "../utils/utils.js";
+
+import { closeWithEsc, openedPopup } from "../utils/utils.js";
+
 const cardData = [
   {
     name: "Yosmite Valley",
@@ -52,41 +60,24 @@ const profileAddButton = document.querySelector("#profile-add-button");
 const profileAddForm = document.querySelector("#modal-add-form");
 const cardTitleInput = document.querySelector("#card-title-input");
 const cardUrlInput = document.querySelector("#card-url-input");
+const addSubmitButton = profileAddModal.querySelector(".modal__submit-button");
 
 /* ------------------------------ PREVIEW CARD ------------------------------ */
 
+export const imageModal = document.querySelector("#image-modal");
 const modalImageCloseButton = document.querySelector(
   "#modal-image-close-button"
 );
-
-export const imageModal = document.querySelector("#image-modal");
 
 /* ----------------------------------- CARDS ---------------------------------- */
 
 const galleryListEl = document.querySelector(".gallery__cards");
 
-/* ----------------------------------- WIP ---------------------------------- */
-cardData.forEach((cardData) => {
-  renderCard(cardData);
-});
-
-function renderCard(cardData) {
-  const card = new Card(cardData, "#card-template");
-
-  const cardElement = card.getTemplate();
-
-  galleryListEl.prepend(cardElement);
-}
-
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------- OPEN AND CLOSE MODAL -------------------------- */
-
-import { openPopup, closePopup } from "../utils/utils.js";
-
-/* --------------------------------- BUTTONS -------------------------------- */
+/* --------------------------------- FORM BUTTONS -------------------------------- */
 
 /* EDIT PROFILE */
 function handleProfileEditSubmit(e) {
@@ -104,55 +95,37 @@ function handleProfileAddSubmit(e) {
   renderCard({ name, link }, galleryListEl);
   profileAddForm.reset();
 
-  const addSubmitButton = profileAddModal.querySelector(
-    ".modal__submit-button"
-  );
-
   addSubmitButton.classList.add("modal__submit-button_disabled");
   addSubmitButton.disabled = true;
 
   closePopup(profileAddModal);
 }
 
-/* ---------------------------------- CARDS --------------------------------- */
+/* ------------------------------- RENDER CARD ------------------------------ */
 
-//function getCardElement(cardData) {
-//const cardElement = cardTemplate.cloneNode(true);
+cardData.forEach((cardData) => {
+  renderCard(cardData);
+});
 
-//const galleryTitleEl = cardElement.querySelector(".gallery__title");
-//const galleryImageEl = cardElement.querySelector(".gallery__image");
-//const likeButton = cardElement.querySelector(".gallery__like-button");
-//const deleteButton = cardElement.querySelector(".gallery__delete-button");
-//const modalImagePreview = document.querySelector(".modal__image-preview");
-//const modalImagePreviewText = document.querySelector(".modal__image-text");
+function renderCard(cardData) {
+  const card = new Card(cardData, "#card-template");
 
-//likeButton.addEventListener("click", () => {
-//likeButton.classList.toggle("gallery__like-button_active");
-// });
+  const cardElement = card.getTemplate();
 
-//deleteButton.addEventListener("click", () => {
-//cardElement.remove(cardData);
-// });
+  galleryListEl.prepend(cardElement);
+}
 
-//galleryImageEl.addEventListener("click", () => {
-//modalImagePreview.src = cardData.link;
-//modalImagePreview.alt = cardData.name;
-// modalImagePreviewText.textContent = cardData.name;
+const editProfileFormValidator = new FormValidator(
+  validationconfig,
+  "#profile-edit-modal"
+);
+editProfileFormValidator.enableValidation();
 
-//  openPopup(imageModal);
-// });
-
-//galleryTitleEl.textContent = cardData.name;
-//galleryImageEl.src = cardData.link;
-//galleryImageEl.alt = cardData.name;
-
-// return cardElement;
-//}
-
-//function renderCard(cardData) {
-//const cardElement = card.generateCard();
-//galleryListEl.prepend(cardElement);
-//}
+const addProfileFormValidator = new FormValidator(
+  validationconfig,
+  "#profile-add-modal"
+);
+addProfileFormValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                               EVENT LISTENERS                              */
