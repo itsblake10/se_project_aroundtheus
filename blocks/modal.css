@@ -81,6 +81,7 @@
 }
 
 .modal__error_visible {
+  border-color: rgba(255, 0, 0);
 }
 
 .modal__input_type_error {
@@ -90,10 +91,11 @@
 .modal__error {
   padding-top: 5px;
   color: #ff0000;
+  border-color: #ff0000;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 15px;
   text-overflow: ellipsis;
   overflow: auto;

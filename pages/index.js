@@ -2,11 +2,7 @@ import Card from "../components/card.js";
 
 import FormValidator from "../components/formvalidator.js";
 
-import validationConfig from "../components/formvalidator.js";
-
-import { openPopup, closePopup } from "../utils/utils.js";
-
-import { closeWithEsc, openedPopup } from "../utils/utils.js";
+import { openPopup, closePopup, validationConfig } from "../utils/utils.js";
 
 const cardData = [
   {
@@ -116,14 +112,13 @@ function renderCard(cardData) {
 }
 
 const editProfileFormValidator = new FormValidator(
-  validationconfig,
-  "#profile-edit-modal"
+  validationConfig,
+  profileEditModal
 );
 editProfileFormValidator.enableValidation();
-
 const addProfileFormValidator = new FormValidator(
-  validationconfig,
-  "#profile-add-modal"
+  validationConfig,
+  profileAddModal
 );
 addProfileFormValidator.enableValidation();
 

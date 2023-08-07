@@ -1,3 +1,12 @@
+const validationConfig = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__submit-button",
+  inactiveButtonClass: ".modal__submit-button_disabled",
+  inputErrorClass: "modal__error_visible",
+  errorClass: "modal__error",
+};
+
 /* ---------------------------- OPEN/CLOSE POPUP ---------------------------- */
 
 function openPopup(modal) {
@@ -12,14 +21,11 @@ function closePopup(modal) {
 
 /* --------------------------- CLOSE WITH ESC KEY --------------------------- */
 
-const openedPopup = document.querySelector(".modal_opened");
-
 function closeWithEsc(evt) {
+  const openedPopup = document.querySelector(".modal_opened");
   if (evt.key === "Escape") {
     closePopup(openedPopup);
   }
 }
 
-export { openPopup, closePopup };
-
-export { closeWithEsc, openedPopup };
+export { openPopup, closePopup, validationConfig };
