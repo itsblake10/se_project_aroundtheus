@@ -84,10 +84,6 @@
   border-color: rgba(255, 0, 0);
 }
 
-.modal__input_type_error {
-  border-color: rgba(255, 0, 0);
-}
-
 .modal__error {
   padding-top: 5px;
   color: #ff0000;
