@@ -51,6 +51,7 @@ export default class Card {
 
     this._cardElement.querySelector(".gallery__title").textContent = this._name;
     this._cardElement.querySelector(".gallery__image").src = this._link;
+    this._cardElement.querySelector(".gallery__image").alt = this._name;
 
     this._setEventListeners();
 

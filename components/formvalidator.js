@@ -7,6 +7,8 @@
 //   errorClass: "modal__error",
 // };
 
+import { validationConfig } from "../utils/utils.js";
+
 class FormValidator {
   constructor(validationConfig, formEl) {
     this._formEl = formEl.querySelector(".modal__form");
@@ -21,7 +23,6 @@ class FormValidator {
   _setEventListeners() {
     this._inputEls = Array.from(this._formEl.querySelectorAll(".modal__input"));
     this._submitButton = this._formEl.querySelector(this._submitButtonSelector);
-    console.log(this._formEl);
     this._inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", (e) => {
         this._checkInputValidity(inputEl);
@@ -69,23 +70,20 @@ class FormValidator {
     });
 
     if (foundInvalid) {
-      this._submitButton.classList.add("modal__submit-button_disabled");
+      this._submitButton.classList.add(validationConfig.inactiveButtonClass);
       return (this._submitButton.disabled = true);
     }
 
-    this._submitButton.classList.remove("modal__submit-button_disabled");
+    this._submitButton.classList.remove(validationConfig.inactiveButtonClass);
     this._submitButton.disabled = false;
   }
 
   /* ---------------------------- Enable/Reset Validation --------------------------- */
 
   enableValidation() {
-    this._formEls = Array.from(document.querySelectorAll(".modal__form"));
-    this._formEls.forEach((formEl) => {
-      this._setEventListeners(this._formEl);
-      formEl.addEventListener("submit", (e) => {
-        e.preventDefault();
-      });
+    this._setEventListeners(this._formEl);
+    this._formEl.addEventListener("submit", (e) => {
+      e.preventDefault();
     });
   }
 
