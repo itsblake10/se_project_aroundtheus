@@ -11,8 +11,8 @@ import { validationConfig } from "../utils/utils.js";
 
 class FormValidator {
   constructor(validationConfig, formEl) {
-    this._formEl = formEl.querySelector(".modal__form");
-    this._inputEl = formEl.querySelector(".modal__input");
+    this._formEl = formEl;
+    this._inputEl = validationConfig.inputSelector;
     this._submitButtonSelector = validationConfig.submitButtonSelector;
     this._inactiveButtonClass = validationConfig.inactiveButtonClass;
     this._inputErrorClass = validationConfig.inputErrorClass;
@@ -21,7 +21,9 @@ class FormValidator {
 
   /* --------------------------- Set Event Listeners -------------------------- */
   _setEventListeners() {
-    this._inputEls = Array.from(this._formEl.querySelectorAll(".modal__input"));
+    this._inputEls = Array.from(
+      this._formEl.querySelectorAll(validationConfig.inputSelector)
+    );
     this._submitButton = this._formEl.querySelector(this._submitButtonSelector);
     this._inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", (e) => {
