@@ -7,8 +7,6 @@
 //   errorClass: "modal__error",
 // };
 
-import { validationConfig } from "../utils/utils.js";
-
 class FormValidator {
   constructor(validationConfig, formEl) {
     this._formEl = formEl;
@@ -21,9 +19,7 @@ class FormValidator {
 
   /* --------------------------- Set Event Listeners -------------------------- */
   _setEventListeners() {
-    this._inputEls = Array.from(
-      this._formEl.querySelectorAll(validationConfig.inputSelector)
-    );
+    this._inputEls = Array.from(this._formEl.querySelectorAll(this._inputEl));
     this._submitButton = this._formEl.querySelector(this._submitButtonSelector);
     this._inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", (e) => {
@@ -72,11 +68,11 @@ class FormValidator {
     });
 
     if (foundInvalid) {
-      this._submitButton.classList.add(validationConfig.inactiveButtonClass);
+      this._submitButton.classList.add(this._inactiveButtonClass);
       return (this._submitButton.disabled = true);
     }
 
-    this._submitButton.classList.remove(validationConfig.inactiveButtonClass);
+    this._submitButton.classList.remove(this._inactiveButtonClass);
     this._submitButton.disabled = false;
   }
 
@@ -94,7 +90,7 @@ class FormValidator {
   //this._hideInputError(inputEl);
   //});
 
-  //this._toggleButtonState();
+  //this.toggleButtonState();
   //}
 }
 

@@ -107,16 +107,20 @@ function renderCard(cardData) {
   galleryListEl.prepend(cardElement);
 }
 
+/* ----------------------------- FORM VALIDATOR ----------------------------- */
+
 const editProfileFormValidator = new FormValidator(
   validationConfig,
   profileEditModal
 );
 
 editProfileFormValidator.enableValidation();
+
 const addProfileFormValidator = new FormValidator(
   validationConfig,
   profileAddModal
 );
+
 addProfileFormValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
@@ -150,7 +154,9 @@ modalAddCloseButton.addEventListener("click", () => {
   closePopup(profileAddModal);
 });
 
-profileAddButton.addEventListener("click", () => openPopup(profileAddModal));
+profileAddButton.addEventListener("click", () => {
+  openPopup(profileAddModal);
+});
 
 profileAddModal.addEventListener("mousedown", function (event) {
   if (event.target.matches("#profile-add-modal")) {
