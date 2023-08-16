@@ -89,6 +89,7 @@ function handleProfileAddSubmit(e) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, galleryListEl);
   profileAddForm.reset();
+  addProfileFormValidator.toggleButtonState();
 
   closePopup(profileAddModal);
 }
