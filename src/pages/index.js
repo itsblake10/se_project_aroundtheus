@@ -1,72 +1,49 @@
-import Card from "../components/Card.js";
+/* -------------------------------------------------------------------------- */
+/*                                   IMPORTS                                  */
+/* -------------------------------------------------------------------------- */
 
+/* --------------------------------- CLASSES -------------------------------- */
+import Card from "../components/card.js";
 import FormValidator from "../components/FormValidator.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
-import { openPopup, closePopup, validationConfig } from "../utils/utils.js";
+/* ---------------------------------- UTILS --------------------------------- */
+import { validationConfig } from "../utils/utils.js";
 
-const cardData = [
-  {
-    name: "Yosmite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
+/* -------------------------------- CARD DATA ------------------------------- */
+import { cardData } from "../components/Constants.js";
 
-/* -------------------------------------------------------------------------- */
-/*                                  ELEMENTS                                  */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------- VARIABLES ------------------------------- */
 
 /* ------------------------------ EDIT PROFILE ------------------------------ */
-
-const profileEditButton = document.querySelector("#profile-edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const modalEditCloseButton = document.querySelector("#modal-edit-close-button");
-const profileTitle = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
-const profileEditForm = document.querySelector("#modal-edit-form");
+import {
+  profileEditButton,
+  profileEditModal,
+  modalEditCloseButton,
+  profileTitle,
+  profileDescription,
+  profileTitleInput,
+  profileDescriptionInput,
+  profileEditForm,
+} from "../components/Constants.js";
 
 /* -------------------------------- ADD CARD -------------------------------- */
-
-const modalAddCloseButton = document.querySelector("#modal-add-close-button");
-const profileAddModal = document.querySelector("#profile-add-modal");
-const profileAddButton = document.querySelector("#profile-add-button");
-const profileAddForm = document.querySelector("#modal-add-form");
-const cardTitleInput = document.querySelector("#card-title-input");
-const cardUrlInput = document.querySelector("#card-url-input");
+import {
+  modalAddCloseButton,
+  profileAddModal,
+  profileAddButton,
+  profileAddForm,
+  cardTitleInput,
+  cardUrlInput,
+} from "../components/Constants.js";
 
 /* ------------------------------ PREVIEW CARD ------------------------------ */
-
-export const imageModal = document.querySelector("#image-modal");
-const modalImageCloseButton = document.querySelector(
-  "#modal-image-close-button"
-);
+import { imageModal, modalImageCloseButton } from "../components/Constants.js";
 
 /* ----------------------------------- CARDS ---------------------------------- */
+import { galleryListEl } from "../components/Constants.js";
 
-const galleryListEl = document.querySelector(".gallery__cards");
+import "../pages/index.css";
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
@@ -93,6 +70,10 @@ function handleProfileAddSubmit(e) {
 
   closePopup(profileAddModal);
 }
+
+/* -------------------------------------------------------------------------- */
+/*                            INSTANTIATING CLASSES                           */
+/* -------------------------------------------------------------------------- */
 
 /* ------------------------------- RENDER CARD ------------------------------ */
 
@@ -124,13 +105,18 @@ const addProfileFormValidator = new FormValidator(
 
 addProfileFormValidator.enableValidation();
 
+/* --------------------------------- MODALS --------------------------------- */
+
+const editProfileModal = new PopupWithForm(
+  "#profile-edit-modal"
+); /*                               EVENT LISTENERS                              */
+
 /* -------------------------------------------------------------------------- */
-/*                               EVENT LISTENERS                              */
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ EDIT PROFILE ------------------------------ */
 
-profileEditButton.addEventListener("click", () => {
+/*profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 
@@ -148,10 +134,11 @@ profileEditModal.addEventListener("mousedown", function (event) {
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+*/
 
 /* -------------------------------- ADD CARD -------------------------------- */
 
-modalAddCloseButton.addEventListener("click", () => {
+/*modalAddCloseButton.addEventListener("click", () => {
   closePopup(profileAddModal);
 });
 
@@ -166,12 +153,13 @@ profileAddModal.addEventListener("mousedown", function (event) {
 });
 
 profileAddForm.addEventListener("submit", handleProfileAddSubmit);
+*/
 
 /* -------------------------------- PREVIEW IMAGE -------------------------------- */
-modalImageCloseButton.addEventListener("click", () => closePopup(imageModal));
+/*modalImageCloseButton.addEventListener("click", () => closePopup(imageModal));
 
 imageModal.addEventListener("mousedown", function (event) {
   if (event.target.matches("#image-modal")) {
     closePopup(imageModal);
   }
-});
+});*/

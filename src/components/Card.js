@@ -1,5 +1,5 @@
-import { openPopup } from "../utils/utils.js";
-import { imageModal } from "../pages/index.js";
+import { Popup } from "../components/Popup";
+import { imageModal } from "./Constants.js";
 
 export default class Card {
   constructor(cardData, cardSelector) {

@@ -84,14 +84,6 @@ class FormValidator {
       e.preventDefault();
     });
   }
-
-  //resetValidation() {
-  //this._inputEls.forEach((inputEl) => {
-  //this._hideInputError(inputEl);
-  //});
-
-  //this.toggleButtonState();
-  //}
 }
 
 export default FormValidator;
