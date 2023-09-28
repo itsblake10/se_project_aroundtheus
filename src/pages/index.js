@@ -6,6 +6,8 @@
 import Card from "../components/card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import UserInfo from "../components/UserInfo.js";
 
 /* ---------------------------------- UTILS --------------------------------- */
 import { validationConfig } from "../utils/utils.js";
@@ -64,7 +66,7 @@ function handleProfileAddSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  renderCard({ name, link }, galleryListEl);
+  renderer({ name, link }, galleryListEl);
   profileAddForm.reset();
   addProfileFormValidator.toggleButtonState();
 
@@ -78,10 +80,10 @@ function handleProfileAddSubmit(e) {
 /* ------------------------------- RENDER CARD ------------------------------ */
 
 cardData.forEach((cardData) => {
-  renderCard(cardData);
+  renderer(cardData);
 });
 
-function renderCard(cardData) {
+function renderer(cardData) {
   const card = new Card(cardData, "#card-template");
 
   const cardElement = card.getTemplate();
@@ -107,9 +109,13 @@ addProfileFormValidator.enableValidation();
 
 /* --------------------------------- MODALS --------------------------------- */
 
-const editProfileModal = new PopupWithForm(
-  "#profile-edit-modal"
-); /*                               EVENT LISTENERS                              */
+const editProfileModal = new PopupWithForm("#profile-edit-modal");
+
+const addProfileModal = new PopupWithForm("#profile-add-modal");
+
+//const imageModal = new PopupWithImage("#image-modal");
+
+/*                               EVENT LISTENERS                              */
 
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
