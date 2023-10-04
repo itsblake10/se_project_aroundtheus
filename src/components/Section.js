@@ -13,6 +13,5 @@ export default class Section {
 
   addItem(cardElement) {
     this._container.prepend(cardElement);
-    //Takes a DOM element and adds it to the container.
   }
 }

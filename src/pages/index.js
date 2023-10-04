@@ -7,7 +7,7 @@ import Card from "../components/card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import UserInfo from "../components/UserInfo.js";
+import userInfo from "../components/userInfo.js";
 
 /* ---------------------------------- UTILS --------------------------------- */
 import { validationConfig } from "../utils/utils.js";
@@ -109,11 +109,35 @@ addProfileFormValidator.enableValidation();
 
 /* --------------------------------- MODALS --------------------------------- */
 
-const editProfileModal = new PopupWithForm("#profile-edit-modal");
+/* -------------------------------- USER INFO ------------------------------- */
 
-const addProfileModal = new PopupWithForm("#profile-add-modal");
+const userProfile = new userInfo(profileTitle, profileDescription);
 
-//const imageModal = new PopupWithImage("#image-modal");
+/* ------------------------------- EDIT MODAL ------------------------------- */
+
+const editProfileModal = new PopupWithForm(
+  "#profile-edit-modal",
+  (inputValues) => {
+    userProfile.setUserInfo({
+      userTitle: inputValues.name,
+      userDescription: inputValues.description,
+    });
+  }
+);
+
+editProfileModal.setEventListeners();
+
+/* -------------------------------- ADD MODAL ------------------------------- */
+
+const addProfileModal = new PopupWithForm("#profile-add-modal", () => {
+  Card.getTemplate();
+});
+
+addProfileModal.setEventListeners();
+
+/* ------------------------------- IMAGE MODAL ------------------------------ */
+
+const imageModal = new PopupWithImage("#image-modal", cardData);
 
 /*                               EVENT LISTENERS                              */
 

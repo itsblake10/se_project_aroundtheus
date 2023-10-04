@@ -23,12 +23,31 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    this._formEl
-      .querySelector(".modal__submit-button")
-      .addEventListener("submit", (evt) => {
-        evt.preventDefault();
-        this._handleFormSubmit(this._getInputValues());
-        this.closePopup();
-      });
+    this._formEl.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+      this._handleFormSubmit(this._getInputValues());
+      this.closePopup();
+    });
+
+    this.profileEditButton.addEventListener("click", () => {});
   }
 }
+
+//function handleProfileEditSubmit(e) {
+//e.preventDefault();
+//profileTitle.textContent = profileTitleInput.value;
+//profileDescription.textContent = profileDescriptionInput.value;
+//closePopup(profileEditModal);
+//}
+
+/* ADD CARD */
+//function handleProfileAddSubmit(e) {
+//e.preventDefault();
+//const name = cardTitleInput.value;
+//const link = cardUrlInput.value;
+//renderer({ name, link }, galleryListEl);
+//profileAddForm.reset();
+//addProfileFormValidator.toggleButtonState();
+//
+//closePopup(profileAddModal);
+//}

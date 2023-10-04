@@ -1,7 +1,7 @@
-export default class UserInfo {
-  constructor(userTitle, userDescription) {
-    this._userTitle = document.querySelector(userTitle);
-    this._userDescription = document.querySelector(userDescription);
+export default class userInfo {
+  constructor(userTitleEl, userDescriptionEl) {
+    this._userTitle = userTitleEl;
+    this._userDescription = userDescriptionEl;
   }
 
   getUserInfo() {
@@ -19,5 +19,3 @@ export default class UserInfo {
     this._userDescription.textContent = userDescription;
   }
 }
-
-//user.setUserInfo({ userTitle: userTitleInput.value })

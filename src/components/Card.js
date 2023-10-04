@@ -1,5 +1,5 @@
-import { Popup } from "../components/Popup";
-import { imageModal } from "./Constants.js";
+import { Popup } from "../components/Popup.js";
+import { cardData, imageModal } from "./Constants.js";
 
 export default class Card {
   constructor(cardData, cardSelector) {
@@ -27,9 +27,11 @@ export default class Card {
         document.querySelector(".modal__image-preview").src = this._link;
         document.querySelector(".modal__image-preview").alt = this._name;
         document.querySelector(".modal__image-text").textContent = this._name;
-
-        openPopup(imageModal);
       });
+
+    this._cardElement
+      .querySelector(".gallery__image")
+      .addEventListener("click", () => {});
   }
 
   _handleLikeButton() {
