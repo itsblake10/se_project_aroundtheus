@@ -93,16 +93,16 @@ const homeSection = new Section(
 homeSection.renderItems();
 
 /* ------------------------------- RENDER CARD ------------------------------ */
-cardData.forEach((cardData) => {
-  renderer(cardData);
+cardData.forEach((item) => {
+  renderer(item);
 });
 
-function renderer(item) {
-  const newCard = new Card("#card-template", handleCardClick);
+function renderer(cardData) {
+  const newCard = new Card("#card-template", cardData, handleCardClick);
 
   const cardElement = newCard.getTemplate();
 
-  Section.addItem(cardElement);
+  homeSection.addItem(cardElement);
 }
 
 /* ----------------------------- FORM VALIDATOR ----------------------------- */
@@ -125,6 +125,27 @@ const userProfile = new UserInfo(profileTitle, profileDescription);
 
 /* --------------------------------- #MODALS# --------------------------------- */
 
+/* -------------------------------- ADD MODAL ------------------------------- */
+function handleCardClick(name, link) {
+  const imagePreviewModal = new PopupWithImage("#image-modal");
+  imagePreviewModal.openPopup(name, link);
+}
+
+// open the image modal
+// set the image modals data (src, alt, textContent)
+
+const addProfileModal = new PopupWithForm(
+  "#profile-add-modal",
+  (inputValues) => {
+    const newCardData = { name: inputValues.name, link: inputValues.link };
+    const newCard = new Card("#card-template", newCardData, handleCardClick);
+    const cardElement = newCard.getTemplate();
+    homeSection.addItem(cardElement);
+  }
+);
+
+addProfileModal.setEventListeners();
+
 /* ------------------------------- EDIT MODAL ------------------------------- */
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
@@ -137,28 +158,6 @@ const editProfileModal = new PopupWithForm(
 );
 
 editProfileModal.setEventListeners();
-
-/* -------------------------------- ADD MODAL ------------------------------- */
-function handleCardClick(name, link) {
-  const imagePreviewModal = new PopupWithImage("#image-modal");
-
-  imagePreviewModal.openPopup(name, link);
-
-  // open the image modal
-  // set the image modals data (src, alt, textContent)
-}
-
-const addProfileModal = new PopupWithForm(
-  "#profile-add-modal",
-  (inputValues) => {
-    const newCardData = { name: inputValues.name, link: inputValues.link };
-    const newCard = new Card(newCardData, "#card-template", handleCardClick);
-    const cardElement = newCard.getTemplate();
-    Section.addItem(cardElement);
-  }
-);
-
-addProfileModal.setEventListeners();
 
 /* ------------------------------- IMAGE MODAL ------------------------------ */
 

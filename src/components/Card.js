@@ -1,9 +1,9 @@
 import { PopupWithImage } from "../components/PopupWithImage.js";
 
 export default class Card {
-  constructor(cardSelector, items, handleCardClick) {
-    this._name = items.name;
-    this._link = items.link;
+  constructor(cardSelector, cardData, handleCardClick) {
+    this._name = cardData.name;
+    this._link = cardData.link;
     this._cardSelector = cardSelector;
     this.handleCardClick = handleCardClick;
   }
@@ -24,7 +24,7 @@ export default class Card {
     this._cardElement
       .querySelector(".gallery__image")
       .addEventListener("click", () => {
-        this._handleCardClick(this._name, this._link);
+        this.handleCardClick(this._name, this._link);
       });
   }
 
