@@ -1,11 +1,11 @@
-import { Popup } from "../components/Popup.js";
-import { cardData, imageModal } from "./Constants.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 
 export default class Card {
-  constructor(cardData, cardSelector) {
-    this._name = cardData.name;
-    this._link = cardData.link;
+  constructor(cardSelector, items, handleCardClick) {
+    this._name = items.name;
+    this._link = items.link;
     this._cardSelector = cardSelector;
+    this.handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
@@ -24,14 +24,8 @@ export default class Card {
     this._cardElement
       .querySelector(".gallery__image")
       .addEventListener("click", () => {
-        document.querySelector(".modal__image-preview").src = this._link;
-        document.querySelector(".modal__image-preview").alt = this._name;
-        document.querySelector(".modal__image-text").textContent = this._name;
+        this._handleCardClick(this._name, this._link);
       });
-
-    this._cardElement
-      .querySelector(".gallery__image")
-      .addEventListener("click", () => {});
   }
 
   _handleLikeButton() {

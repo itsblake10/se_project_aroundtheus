@@ -1,21 +1,23 @@
 /* -------------------------------------------------------------------------- */
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
+import "../pages/index.css";
 
-/* --------------------------------- CLASSES -------------------------------- */
+/* --------------------------------- #CLASSES# -------------------------------- */
+import Section from "../components/Section.js";
 import Card from "../components/card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import userInfo from "../components/userInfo.js";
+import UserInfo from "../components/userInfo.js";
+
+/* -------------------------------- #VARIABLES# ------------------------------- */
 
 /* ---------------------------------- UTILS --------------------------------- */
 import { validationConfig } from "../utils/utils.js";
 
-/* -------------------------------- CARD DATA ------------------------------- */
+/* ---------------------------------- DATA ---------------------------------- */
 import { cardData } from "../components/Constants.js";
-
-/* -------------------------------- VARIABLES ------------------------------- */
 
 /* ------------------------------ EDIT PROFILE ------------------------------ */
 import {
@@ -42,10 +44,8 @@ import {
 /* ------------------------------ PREVIEW CARD ------------------------------ */
 import { imageModal, modalImageCloseButton } from "../components/Constants.js";
 
-/* ----------------------------------- CARDS ---------------------------------- */
+/* ----------------------------------- GRID/CARDS ---------------------------------- */
 import { galleryListEl } from "../components/Constants.js";
-
-import "../pages/index.css";
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
@@ -77,22 +77,35 @@ function handleProfileAddSubmit(e) {
 /*                            INSTANTIATING CLASSES                           */
 /* -------------------------------------------------------------------------- */
 
-/* ------------------------------- RENDER CARD ------------------------------ */
+/* --------------------------------- SECTION -------------------------------- */
+const homeSection = new Section(
+  {
+    items: cardData,
+    renderer: (items) => {
+      const newCard = new Card("#card-template", items, handleCardClick);
+      const cardElement = newCard.getTemplate();
+      homeSection.addItem(cardElement);
+    },
+  },
+  ".gallery__cards"
+);
 
+homeSection.renderItems();
+
+/* ------------------------------- RENDER CARD ------------------------------ */
 cardData.forEach((cardData) => {
   renderer(cardData);
 });
 
-function renderer(cardData) {
-  const card = new Card(cardData, "#card-template");
+function renderer(item) {
+  const newCard = new Card("#card-template", handleCardClick);
 
-  const cardElement = card.getTemplate();
+  const cardElement = newCard.getTemplate();
 
-  galleryListEl.prepend(cardElement);
+  Section.addItem(cardElement);
 }
 
 /* ----------------------------- FORM VALIDATOR ----------------------------- */
-
 const editProfileFormValidator = new FormValidator(
   validationConfig,
   profileEditModal
@@ -107,14 +120,12 @@ const addProfileFormValidator = new FormValidator(
 
 addProfileFormValidator.enableValidation();
 
-/* --------------------------------- MODALS --------------------------------- */
-
 /* -------------------------------- USER INFO ------------------------------- */
+const userProfile = new UserInfo(profileTitle, profileDescription);
 
-const userProfile = new userInfo(profileTitle, profileDescription);
+/* --------------------------------- #MODALS# --------------------------------- */
 
 /* ------------------------------- EDIT MODAL ------------------------------- */
-
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
   (inputValues) => {
@@ -128,21 +139,32 @@ const editProfileModal = new PopupWithForm(
 editProfileModal.setEventListeners();
 
 /* -------------------------------- ADD MODAL ------------------------------- */
+function handleCardClick(name, link) {
+  const imagePreviewModal = new PopupWithImage("#image-modal");
 
-const addProfileModal = new PopupWithForm("#profile-add-modal", () => {
-  Card.getTemplate();
-});
+  imagePreviewModal.openPopup(name, link);
+
+  // open the image modal
+  // set the image modals data (src, alt, textContent)
+}
+
+const addProfileModal = new PopupWithForm(
+  "#profile-add-modal",
+  (inputValues) => {
+    const newCardData = { name: inputValues.name, link: inputValues.link };
+    const newCard = new Card(newCardData, "#card-template", handleCardClick);
+    const cardElement = newCard.getTemplate();
+    Section.addItem(cardElement);
+  }
+);
 
 addProfileModal.setEventListeners();
 
 /* ------------------------------- IMAGE MODAL ------------------------------ */
 
-const imageModal = new PopupWithImage("#image-modal", cardData);
+//const imageModal = new PopupWithImage("#image-modal");
 
-/*                               EVENT LISTENERS                              */
-
-/* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
+/* ------------------------------------ # ----------------------------------- */
 
 /* ------------------------------ EDIT PROFILE ------------------------------ */
 

@@ -29,7 +29,7 @@ export default class PopupWithForm extends Popup {
       this.closePopup();
     });
 
-    this.profileEditButton.addEventListener("click", () => {});
+    //  this.profileEditButton.addEventListener("click", () => {});
   }
 }
 

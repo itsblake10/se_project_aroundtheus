@@ -29,7 +29,7 @@ export const cardData = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/*                             ELEMENTS/VARIABLES                             */
+/*                                  VARIABLES                                 */
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ EDIT PROFILE ------------------------------ */
@@ -67,6 +67,6 @@ export const modalImageCloseButton = document.querySelector(
   "#modal-image-close-button"
 );
 
-/* ----------------------------------- CARDS ---------------------------------- */
+/* ----------------------------------- GRID/CARDS ---------------------------------- */
 
 export const galleryListEl = document.querySelector(".gallery__cards");
