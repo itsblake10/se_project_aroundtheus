@@ -28,7 +28,6 @@ import {
   profileDescription,
   profileTitleInput,
   profileDescriptionInput,
-  profileEditForm,
 } from "../components/Constants.js";
 
 /* -------------------------------- ADD CARD -------------------------------- */
@@ -42,7 +41,7 @@ import {
 } from "../components/Constants.js";
 
 /* ------------------------------ PREVIEW CARD ------------------------------ */
-import { imageModal, modalImageCloseButton } from "../components/Constants.js";
+import { modalImageCloseButton } from "../components/Constants.js";
 
 /* ----------------------------------- GRID/CARDS ---------------------------------- */
 import { galleryListEl } from "../components/Constants.js";
@@ -125,27 +124,6 @@ const userProfile = new UserInfo(profileTitle, profileDescription);
 
 /* --------------------------------- #MODALS# --------------------------------- */
 
-/* -------------------------------- ADD MODAL ------------------------------- */
-function handleCardClick(name, link) {
-  const imagePreviewModal = new PopupWithImage("#image-modal");
-  imagePreviewModal.openPopup(name, link);
-}
-
-// open the image modal
-// set the image modals data (src, alt, textContent)
-
-const addProfileModal = new PopupWithForm(
-  "#profile-add-modal",
-  (inputValues) => {
-    const newCardData = { name: inputValues.name, link: inputValues.link };
-    const newCard = new Card("#card-template", newCardData, handleCardClick);
-    const cardElement = newCard.getTemplate();
-    homeSection.addItem(cardElement);
-  }
-);
-
-addProfileModal.setEventListeners();
-
 /* ------------------------------- EDIT MODAL ------------------------------- */
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
@@ -159,33 +137,53 @@ const editProfileModal = new PopupWithForm(
 
 editProfileModal.setEventListeners();
 
-/* ------------------------------- IMAGE MODAL ------------------------------ */
+profileEditButton.addEventListener("click", () => {
+  editProfileModal.openPopup();
+});
 
-//const imageModal = new PopupWithImage("#image-modal");
+modalEditCloseButton.addEventListener("click", () => {
+  editProfileModal.closePopup();
+});
+
+/* -------------------------------- ADD MODAL ------------------------------- */
+const addProfileModal = new PopupWithForm(
+  "#profile-add-modal",
+  (inputValues) => {
+    const newCardData = { name: inputValues.name, link: inputValues.link };
+    const newCard = new Card("#card-template", newCardData, handleCardClick);
+    const cardElement = newCard.getTemplate();
+    homeSection.addItem(cardElement);
+  }
+);
+
+addProfileModal.setEventListeners();
+
+profileAddButton.addEventListener("click", () => {
+  addProfileModal.openPopup();
+});
+
+modalAddCloseButton.addEventListener("click", () => {
+  addProfileModal.closePopup();
+});
+
+/* ------------------------------- IMAGE MODAL ------------------------------ */
+const imagePreviewModal = new PopupWithImage("#image-modal");
+
+function handleCardClick(name, link) {
+  imagePreviewModal.openPopup(name, link);
+}
+
+modalImageCloseButton.addEventListener("click", () => {
+  imagePreviewModal.closePopup();
+});
 
 /* ------------------------------------ # ----------------------------------- */
 
-/* ------------------------------ EDIT PROFILE ------------------------------ */
-
-/*profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-
-  openPopup(profileEditModal);
-});
-
-modalEditCloseButton.addEventListener("click", () =>
-  closePopup(profileEditModal)
-);
-
-profileEditModal.addEventListener("mousedown", function (event) {
+/*profileEditModal.addEventListener("mousedown", function (event) {
   if (event.target.matches("#profile-edit-modal")) {
     closePopup(profileEditModal);
   }
-});
-
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-*/
+});*/
 
 /* -------------------------------- ADD CARD -------------------------------- */
 

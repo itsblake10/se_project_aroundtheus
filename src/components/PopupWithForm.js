@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._formEl = this._modal.querySelector(".modal__form");
     this._inputEls = this._formEl.querySelectorAll(".modal__input");
+    this._closeButton = this._modal.querySelector(".modal__close-button");
   }
 
   closePopup() {
@@ -29,25 +30,8 @@ export default class PopupWithForm extends Popup {
       this.closePopup();
     });
 
-    //  this.profileEditButton.addEventListener("click", () => {});
+    this._closeButton.addEventListener("click", () => {
+      this.closePopup();
+    });
   }
 }
-
-//function handleProfileEditSubmit(e) {
-//e.preventDefault();
-//profileTitle.textContent = profileTitleInput.value;
-//profileDescription.textContent = profileDescriptionInput.value;
-//closePopup(profileEditModal);
-//}
-
-/* ADD CARD */
-//function handleProfileAddSubmit(e) {
-//e.preventDefault();
-//const name = cardTitleInput.value;
-//const link = cardUrlInput.value;
-//renderer({ name, link }, galleryListEl);
-//profileAddForm.reset();
-//addProfileFormValidator.toggleButtonState();
-//
-//closePopup(profileAddModal);
-//}

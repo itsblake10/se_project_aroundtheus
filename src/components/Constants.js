@@ -62,7 +62,6 @@ export const cardUrlInput = document.querySelector("#card-url-input");
 
 /* ------------------------------ PREVIEW CARD ------------------------------ */
 
-export const imageModal = document.querySelector("#image-modal");
 export const modalImageCloseButton = document.querySelector(
   "#modal-image-close-button"
 );
