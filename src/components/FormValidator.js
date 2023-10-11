@@ -22,7 +22,7 @@ class FormValidator {
     this._inputEls = Array.from(this._formEl.querySelectorAll(this._inputEl));
     this._submitButton = this._formEl.querySelector(this._submitButtonSelector);
     this._inputEls.forEach((inputEl) => {
-      inputEl.addEventListener("input", (e) => {
+      inputEl.addEventListener("input", () => {
         this._checkInputValidity(inputEl);
         this.toggleButtonState();
       });
@@ -82,6 +82,7 @@ class FormValidator {
     this._setEventListeners(this._formEl);
     this._formEl.addEventListener("submit", (e) => {
       e.preventDefault();
+      this.toggleButtonState();
     });
   }
 }
