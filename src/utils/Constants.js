@@ -50,9 +50,7 @@ export const profileEditForm = document.querySelector("#modal-edit-form");
 
 /* -------------------------------- ADD CARD -------------------------------- */
 
-export const modalAddCloseButton = document.querySelector(
-  "#modal-add-close-button"
-);
+export const closeButton = document.querySelector(".modal__close-button");
 
 export const profileAddModal = document.querySelector("#profile-add-modal");
 export const profileAddButton = document.querySelector("#profile-add-button");

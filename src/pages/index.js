@@ -9,7 +9,7 @@ import Card from "../components/card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import UserInfo from "../components/userInfo.js";
+import UserInfo from "../components/UserInfo.js";
 
 /* -------------------------------- #VARIABLES# ------------------------------- */
 
@@ -17,18 +17,18 @@ import UserInfo from "../components/userInfo.js";
 import { validationConfig } from "../utils/utils.js";
 
 /* ---------------------------------- DATA ---------------------------------- */
-import { cardData } from "../components/Constants.js";
+import { cardData } from "../utils/Constants.js";
 
 /* ------------------------------ EDIT PROFILE ------------------------------ */
 import {
   profileEditButton,
   profileEditModal,
-  modalEditCloseButton,
+  closeButton,
   profileTitle,
   profileDescription,
   profileTitleInput,
   profileDescriptionInput,
-} from "../components/Constants.js";
+} from "../utils/Constants.js";
 
 /* -------------------------------- ADD CARD -------------------------------- */
 import {
@@ -38,17 +38,22 @@ import {
   profileAddForm,
   cardTitleInput,
   cardUrlInput,
-} from "../components/Constants.js";
+} from "../utils/Constants.js";
 
 /* ------------------------------ PREVIEW CARD ------------------------------ */
-import { modalImageCloseButton } from "../components/Constants.js";
+import { modalImageCloseButton } from "../utils/Constants.js";
 
 /* ----------------------------------- GRID/CARDS ---------------------------------- */
-import { galleryListEl } from "../components/Constants.js";
+import { galleryListEl } from "../utils/Constants.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
+function createCard(items) {
+  const newCard = new Card("#card-template", items, handleCardClick);
+  const cardElement = newCard.getTemplate();
+  return cardElement;
+}
 
 /* -------------------------------------------------------------------------- */
 /*                            INSTANTIATING CLASSES                           */
@@ -59,8 +64,7 @@ const homeSection = new Section(
   {
     items: cardData,
     renderer: (items) => {
-      const newCard = new Card("#card-template", items, handleCardClick);
-      const cardElement = newCard.getTemplate();
+      const cardElement = createCard(items);
       homeSection.addItem(cardElement);
     },
   },
@@ -68,19 +72,6 @@ const homeSection = new Section(
 );
 
 homeSection.renderItems();
-
-/* ------------------------------- RENDER CARD ------------------------------ */
-function renderer(cardData) {
-  const newCard = new Card("#card-template", cardData, handleCardClick);
-
-  const cardElement = newCard.getTemplate();
-
-  homeSection.addItem(cardElement);
-}
-
-cardData.forEach((item) => {
-  renderer(item);
-});
 
 /* ----------------------------- FORM VALIDATOR ----------------------------- */
 const editProfileFormValidator = new FormValidator(
@@ -113,39 +104,28 @@ const editProfileModal = new PopupWithForm(
   }
 );
 
+editProfileModal.setEventListeners();
+
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
+  profileTitleInput.value = userProfile.getUserInfo();
+  profileDescriptionInput.value = userProfile.getUserInfo();
   editProfileFormValidator.toggleButtonState();
 
   editProfileModal.openPopup();
 });
 
-modalEditCloseButton.addEventListener("click", () => {
-  editProfileModal.closePopup();
-});
-
-editProfileModal.setEventListeners();
-
 /* -------------------------------- ADD MODAL ------------------------------- */
 const addProfileModal = new PopupWithForm(
   "#profile-add-modal",
   (inputValues) => {
-    console.log(inputValues);
     const newCardData = { name: inputValues.title, link: inputValues.link };
-    console.log(inputValues);
-    const newCard = new Card("#card-template", newCardData, handleCardClick);
-    const cardElement = newCard.getTemplate();
+    const cardElement = createCard(newCardData);
     homeSection.addItem(cardElement);
   }
 );
 
 profileAddButton.addEventListener("click", () => {
   addProfileModal.openPopup();
-});
-
-modalAddCloseButton.addEventListener("click", () => {
-  addProfileModal.closePopup();
 });
 
 addProfileModal.setEventListeners();
@@ -156,10 +136,6 @@ const imagePreviewModal = new PopupWithImage("#image-modal");
 function handleCardClick(name, link) {
   imagePreviewModal.openPopup(name, link);
 }
-
-modalImageCloseButton.addEventListener("click", () => {
-  imagePreviewModal.closePopup();
-});
 
 imagePreviewModal.setEventListeners();
 

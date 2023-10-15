@@ -13,4 +13,8 @@ export default class PopupWithImage extends Popup {
     this._modalImageText.textContent = name;
     super.openPopup();
   }
+
+  setEventListeners() {
+    super.setEventListeners();
+  }
 }
