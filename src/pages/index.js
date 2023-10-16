@@ -107,8 +107,9 @@ const editProfileModal = new PopupWithForm(
 editProfileModal.setEventListeners();
 
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = userProfile.getUserInfo();
-  profileDescriptionInput.value = userProfile.getUserInfo();
+  const userInfo = userProfile.getUserInfo();
+  profileTitleInput.value = userInfo.userTitle;
+  profileDescriptionInput.value = userInfo.userDescription;
   editProfileFormValidator.toggleButtonState();
 
   editProfileModal.openPopup();
