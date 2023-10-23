@@ -148,14 +148,30 @@
 
     <!-- ---------------------------- IMAGE MODAL ---------------------------- -->
     <div class="modal" id="image-modal">
-      <div class="modal__container-image">
+      <div class="modal__container-confirm">
         <button
           class="modal__close-button"
           id="modal-image-close-button"
           type="button"
         ></button>
-        <img src="#" alt="" class="modal__image-preview" />
-        <p class="modal__image-text"></p>
+        <button
+            class="modal__submit-button"
+            id="modal-confirm-submit-button"
+            type="submit"
+          >
+      </div>
+    </div>
+
+    <!-- ---------------------------- CONFIRM MODAL ---------------------------- -->
+    <div class="modal" id="confirm-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close-button"
+          id="modal-confirm-close-button"
+          type="button"
+        ></button>
+        <h2 class="modal-confirm__heading">Are you sure?</h2>
+          <button class="modal-confirm__submit-button" type="submit">Yes</button>
       </div>
     </div>
 

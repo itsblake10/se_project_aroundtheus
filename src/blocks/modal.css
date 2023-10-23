@@ -182,6 +182,47 @@
   margin: 0;
 }
 
+.modal-confirm__heading {
+  color: black;
+  max-width: 360px;
+  max-height: 23px;
+  margin-left: 36px;
+  margin-top: 34px;
+  margin-bottom: 0;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.modal-confirm__submit-button {
+  background-color: black;
+  border: none;
+  color: white;
+  border-style: none;
+  width: 85%;
+  min-height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 38px;
+  margin-bottom: 36px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  align-self: center;
+}
+
+.modal-confirm__submit-button:hover {
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                MEDIA QUERIES                               */
 /* -------------------------------------------------------------------------- */
