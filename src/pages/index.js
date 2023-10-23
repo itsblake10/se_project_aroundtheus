@@ -141,5 +141,3 @@ function handleCardClick(name, link) {
 imagePreviewModal.setEventListeners();
 
 /* ------------------------------------ # ----------------------------------- */
-
-//project-9
