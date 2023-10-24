@@ -89,6 +89,40 @@
   transition: 0.2s ease-in-out;
 }
 
+.profile__image-container {
+  position: relative;
+}
+
+.profile__edit-image-icon {
+  position: absolute;
+  top: 48px;
+  left: 48px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profile__image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: none;
+  object-fit: cover;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profile__image-container:hover .profile__image-overlay,
+.profile__image-container:hover .profile__edit-image-icon {
+  opacity: 1;
+  cursor: pointer;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                MEDIA QUERIES                               */
 /* -------------------------------------------------------------------------- */

@@ -28,11 +28,19 @@
       <main class="content">
         <!-- ------------------------------- PROFILE ------------------------------- -->
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="profile image"
-            class="profile__image"
-          />
+          <div class="profile__image-container">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="profile image"
+              class="profile__image"
+            />
+            <img
+              src="<%=require('./images/profile-edit-icon.svg')%>"
+              alt="edit profile icon"
+              class="profile__edit-image-icon"
+            />
+            <div class="profile__image-overlay"></div>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
