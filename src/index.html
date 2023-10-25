@@ -34,12 +34,14 @@
               alt="profile image"
               class="profile__image"
             />
-            <img
-              src="<%=require('./images/profile-edit-icon.svg')%>"
-              alt="edit profile icon"
-              class="profile__edit-image-icon"
-            />
-            <div class="profile__image-overlay"></div>
+            <button class="profile__edit-image-button">
+              <img
+                src="<%=require('./images/profile-edit-icon.svg')%>"
+                alt="edit profile icon"
+                class="profile__edit-image-icon"
+              />
+              <div class="profile__image-overlay"></div>
+            </button>
           </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
@@ -73,7 +75,7 @@
     <!--                                 MODALS                                  -->
     <!-- ----------------------------------------------------------------------- -->
 
-    <!-- ----------------------------- EDIT MODAL ------------------------------ -->
+    <!-- ----------------------------- EDIT PROFILE MODAL ------------------------------ -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button
@@ -113,7 +115,7 @@
       </div>
     </div>
 
-    <!-- ------------------------------ ADD MODAL ------------------------------ -->
+    <!-- ------------------------------ ADD CARD MODAL ------------------------------ -->
     <div class="modal" id="profile-add-modal">
       <div class="modal__container">
         <button
@@ -154,7 +156,7 @@
       </div>
     </div>
 
-    <!-- ---------------------------- IMAGE MODAL ---------------------------- -->
+    <!-- ---------------------------- PREVIEW IMAGE MODAL ---------------------------- -->
     <div class="modal" id="image-modal">
       <div class="modal__container-image">
         <button
@@ -176,7 +178,12 @@
           type="button"
         ></button>
         <h2 class="modal-confirm__heading">Are you sure?</h2>
-        <button class="modal-confirm__submit-button" type="submit">Yes</button>
+        <button
+          class="modal__submit-button modal-confirm__submit-button"
+          type="submit"
+        >
+          Yes
+        </button>
       </div>
     </div>
 
@@ -194,7 +201,7 @@
             type="url"
             name="link"
             id="profile-picture-url-input"
-            class="modal-profile-picture__input"
+            class="modal__input"
             placeholder="Image link"
             required
           />

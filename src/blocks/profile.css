@@ -93,13 +93,18 @@
   position: relative;
 }
 
+.profile__edit-image-button {
+  padding: 0;
+  border: none;
+  transition: opacity 0.3s;
+}
+
 .profile__edit-image-icon {
   position: absolute;
   top: 48px;
   left: 48px;
   z-index: 1;
   opacity: 0;
-  transition: opacity 0.3s;
 }
 
 .profile__image-overlay {
