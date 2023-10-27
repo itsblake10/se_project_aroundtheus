@@ -77,3 +77,6 @@ export const cardDeleteButton = document.querySelector(
   ".gallery__delete-button"
 );
 export const deleteCardModal = document.querySelector("#confirm-modal");
+export const confirmDeleteButton = document.querySelector(
+  ".modal-confirm__submit-button"
+);

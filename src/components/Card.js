@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(cardSelector, cardData, handleCardClick) {
+  constructor(cardSelector, cardData, handleCardClick, handleCardDelete) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._cardSelector = cardSelector;
     this.handleCardClick = handleCardClick;
+    this.handleCardDelete = handleCardDelete;
   }
 
   _handleLikeButton() {
@@ -41,7 +42,7 @@ export default class Card {
     this._cardElement
       .querySelector(".gallery__delete-button")
       .addEventListener("click", () => {
-        this._handleDeleteButton();
+        this.handleCardDelete(this);
       });
 
     this._cardElement

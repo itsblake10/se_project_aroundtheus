@@ -50,7 +50,12 @@ import { cardDeleteButton } from "../utils/Constants.js";
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 function createCard(items) {
-  const newCard = new Card("#card-template", items, handleCardClick);
+  const newCard = new Card(
+    "#card-template",
+    items,
+    handleCardClick,
+    handleCardDelete
+  );
   const cardElement = newCard.getTemplate();
   return cardElement;
 }
@@ -72,12 +77,6 @@ const homeSection = new Section(
 );
 
 homeSection.renderItems();
-
-//const confirmDeletePopup = new Popup("#confirm-modal");
-
-//cardDeleteButton.addEventListener("click", () => {
-//confirmDeletePopup.openPopup();
-//});
 
 /* ----------------------------- FORM VALIDATOR ----------------------------- */
 const editProfileFormValidator = new FormValidator(
@@ -159,7 +158,6 @@ const editProfilePictureModal = new PopupWithForm(
   (inputValues) => {
     const newProfilePicture = { link: inputValues.link };
     profilePicture.src = newProfilePicture.link;
-    console.log(profilePicture);
   }
 );
 
@@ -170,6 +168,30 @@ profileEditPictureButton.addEventListener("click", () => {
   editProfilePictureModal.openPopup();
 });
 
+/* -------------------------- COMFIRM DELETE MODAL -------------------------- */
+
 /* ------------------------------------ x ----------------------------------- */
 
 // d6071372-df29-4c5a-9061-a19688c6bc4b
+
+//const CardDeleteButtons = document.querySelectorAll(".gallery__delete-button");
+
+//CardDeleteButtons.forEach((deleteButton) => {
+//deleteButton.addEventListener("click", () => {
+//const DeleteCardButton = deleteButton.closest(".gallery__card");
+//DeleteCardButton.addEventListener("click", () => {
+//  const confirmDeleteModal = new Popup("#confirm-modal");
+
+//confirmDeleteModal.openPopup();
+//confirmDeleteModal.setEventListeners();
+//});
+//});
+//});
+
+const confirmDeleteModal = new Popup("#confirm-modal");
+
+function handleCardDelete() {
+  confirmDeleteModal.openPopup();
+}
+
+confirmDeleteModal.setEventListeners();
