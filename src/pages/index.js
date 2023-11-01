@@ -10,7 +10,9 @@ import FormValidator from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupConfirm from "../components/PopupConfirm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 /* -------------------------------- #VARIABLES# ------------------------------- */
 
@@ -44,19 +46,34 @@ import {
 } from "../utils/Constants.js";
 
 /* ----------------------------------- GRID/CARDS ---------------------------------- */
-import { cardDeleteButton } from "../utils/Constants.js";
+import { cardDeleteButton, confirmDeleteButton } from "../utils/Constants.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
+const confirmPopup = new PopupConfirm("#confirm-modal");
+
+confirmPopup.setEventListeners();
+
+//function handleCardDelete(card) {
+//confirmPopup.openPopup();
+//}
+
+// function handleConfirmDelete(card) {
+//   card.deleteCard();
+// }
+
 function createCard(items) {
-  const newCard = new Card(
-    "#card-template",
-    items,
-    handleCardClick,
-    handleCardDelete
-  );
+  const newCard = new Card("#card-template", items, handleCardClick, function (
+    card
+  ) {
+    confirmPopup.openPopup();
+    confirmPopup.handleConfirm(function () {
+      card.deleteCard();
+    });
+  });
   const cardElement = newCard.getTemplate();
+
   return cardElement;
 }
 
@@ -169,29 +186,37 @@ profileEditPictureButton.addEventListener("click", () => {
 });
 
 /* -------------------------- COMFIRM DELETE MODAL -------------------------- */
+//const confirmPopup = new PopupConfirm("#confirm-modal", handleConfirmDelete);
+
+//confirmPopup.setEventListeners();
+
+//function handleCardDelete() {
+//confirmPopup.openPopup();
+//}
+
+//function handleConfirmDelete(card) {
+//card.remove();
+//card = null;
+//}
 
 /* ------------------------------------ x ----------------------------------- */
 
-// d6071372-df29-4c5a-9061-a19688c6bc4b
+// 74d9af6b-378b-4926-b030-13bc7ddfd7d9
 
-//const CardDeleteButtons = document.querySelectorAll(".gallery__delete-button");
+fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+  method: "GET",
+  headers: {
+    authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+  },
+})
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
 
-//CardDeleteButtons.forEach((deleteButton) => {
-//deleteButton.addEventListener("click", () => {
-//const DeleteCardButton = deleteButton.closest(".gallery__card");
-//DeleteCardButton.addEventListener("click", () => {
-//  const confirmDeleteModal = new Popup("#confirm-modal");
+const newApi = new Api("https://around-api.en.tripleten-services.com/v1");
 
-//confirmDeleteModal.openPopup();
-//confirmDeleteModal.setEventListeners();
-//});
-//});
-//});
-
-const confirmDeleteModal = new Popup("#confirm-modal");
-
-function handleCardDelete() {
-  confirmDeleteModal.openPopup();
-}
-
-confirmDeleteModal.setEventListeners();
+newApi.getInitialCards();

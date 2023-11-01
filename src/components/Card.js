@@ -18,6 +18,10 @@ export default class Card {
     this._cardElement = null;
   }
 
+  deleteCard() {
+    this._handleDeleteButton();
+  }
+
   getTemplate() {
     this._cardElement = document
       .querySelector(this._cardSelector)
@@ -42,6 +46,7 @@ export default class Card {
     this._cardElement
       .querySelector(".gallery__delete-button")
       .addEventListener("click", () => {
+        console.log(this);
         this.handleCardDelete(this);
       });
 
