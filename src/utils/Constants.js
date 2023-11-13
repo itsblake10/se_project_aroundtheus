@@ -76,7 +76,6 @@ export const galleryListEl = document.querySelector(".gallery__cards");
 export const cardDeleteButton = document.querySelector(
   ".gallery__delete-button"
 );
-console.log(cardDeleteButton);
 export const deleteCardModal = document.querySelector("#confirm-modal");
 export const confirmDeleteButton = document.querySelector(
   ".modal-confirm__submit-button"

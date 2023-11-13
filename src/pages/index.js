@@ -7,7 +7,6 @@ import "../pages/index.css";
 import Section from "../components/Section.js";
 import Card from "../components/card.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupConfirm from "../components/PopupConfirm.js";
@@ -18,9 +17,6 @@ import Api from "../components/Api.js";
 
 /* ---------------------------------- UTILS --------------------------------- */
 import { validationConfig } from "../utils/utils.js";
-
-/* ---------------------------------- DATA ---------------------------------- */
-import { cardData } from "../utils/Constants.js";
 
 /* ------------------------------ EDIT PROFILE ------------------------------ */
 import {
@@ -36,9 +32,6 @@ import {
 /* -------------------------------- ADD CARD -------------------------------- */
 import { profileAddModal, profileAddButton } from "../utils/Constants.js";
 
-/* ------------------------------ PREVIEW CARD ------------------------------ */
-//import { modalImageCloseButton } from "../utils/Constants.js";
-
 /* ------------------------- CHANGE PROFILE PICTURE ------------------------- */
 import {
   profilePictureModal,
@@ -51,20 +44,17 @@ import { cardDeleteButton, confirmDeleteButton } from "../utils/Constants.js";
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
+
+const apiUrl = "https://around-api.en.tripleten-services.com";
+
+const newApi = new Api(apiUrl);
+
 const confirmPopup = new PopupConfirm("#confirm-modal");
 
 confirmPopup.setEventListeners();
 
-//function handleCardDelete(card) {
-//confirmPopup.openPopup();
-//}
-
-// function handleConfirmDelete(card) {
-//   card.deleteCard();
-// }
-
 function createCard(items) {
-  const newCard = new Card("#card-template", items, handleCardClick, function (
+  const card = new Card("#card-template", items, handleCardClick, function (
     card
   ) {
     confirmPopup.openPopup();
@@ -72,7 +62,8 @@ function createCard(items) {
       card.deleteCard();
     });
   });
-  const cardElement = newCard.getTemplate();
+
+  const cardElement = card.getTemplate();
 
   return cardElement;
 }
@@ -84,7 +75,6 @@ function createCard(items) {
 /* --------------------------------- SECTION -------------------------------- */
 const homeSection = new Section(
   {
-    items: cardData,
     renderer: (items) => {
       const cardElement = createCard(items);
       homeSection.addItem(cardElement);
@@ -93,7 +83,9 @@ const homeSection = new Section(
   ".gallery__cards"
 );
 
-homeSection.renderItems();
+newApi.getInitialCards().then((data) => {
+  homeSection.renderItems(data.reverse());
+});
 
 /* ----------------------------- FORM VALIDATOR ----------------------------- */
 const editProfileFormValidator = new FormValidator(
@@ -126,10 +118,14 @@ const userProfile = new UserInfo(profileTitle, profileDescription);
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
   (inputValues) => {
-    userProfile.setUserInfo({
-      userTitle: inputValues.name,
-      userDescription: inputValues.description,
-    });
+    newApi
+      .editProfile(inputValues.name, inputValues.description)
+      .then((newProfileData) => {
+        userProfile.setUserInfo({
+          userTitle: newProfileData.name,
+          userDescription: newProfileData.about,
+        });
+      });
   }
 );
 
@@ -148,9 +144,12 @@ profileEditButton.addEventListener("click", () => {
 const addProfileModal = new PopupWithForm(
   "#profile-add-modal",
   (inputValues) => {
-    const newCardData = { name: inputValues.title, link: inputValues.link };
-    const cardElement = createCard(newCardData);
-    homeSection.addItem(cardElement);
+    newApi
+      .createNewCard(inputValues.title, inputValues.link)
+      .then((newCardData) => {
+        const cardElement = createCard(newCardData);
+        homeSection.addItem(cardElement);
+      });
   }
 );
 
@@ -185,38 +184,22 @@ profileEditPictureButton.addEventListener("click", () => {
   editProfilePictureModal.openPopup();
 });
 
-/* -------------------------- COMFIRM DELETE MODAL -------------------------- */
-//const confirmPopup = new PopupConfirm("#confirm-modal", handleConfirmDelete);
+/* -------------------------------------------------------------------------- */
+/*                                     API                                    */
+/* -------------------------------------------------------------------------- */
 
-//confirmPopup.setEventListeners();
+// fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+//   method: "GET",
+//   headers: {
+//     authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+//   },
+// })
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//   });
 
-//function handleCardDelete() {
-//confirmPopup.openPopup();
-//}
-
-//function handleConfirmDelete(card) {
-//card.remove();
-//card = null;
-//}
-
-/* ------------------------------------ x ----------------------------------- */
-
-// 74d9af6b-378b-4926-b030-13bc7ddfd7d9
-
-fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
-  method: "GET",
-  headers: {
-    authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
-  },
-})
-  .then((res) => res.json())
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
-
-const newApi = new Api("https://around-api.en.tripleten-services.com/v1");
-
-newApi.getInitialCards();
+/* ------------------------------------ X ----------------------------------- */
