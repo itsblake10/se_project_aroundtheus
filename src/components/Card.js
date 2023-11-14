@@ -2,6 +2,7 @@ export default class Card {
   constructor(cardSelector, items, handleCardClick, handleCardDelete) {
     this._name = items.name;
     this._link = items.link;
+    this._id = items._id;
     this._cardSelector = cardSelector;
     this.handleCardClick = handleCardClick;
     this.handleCardDelete = handleCardDelete;
@@ -31,6 +32,8 @@ export default class Card {
     this._cardElement.querySelector(".gallery__title").textContent = this._name;
     this._cardElement.querySelector(".gallery__image").src = this._link;
     this._cardElement.querySelector(".gallery__image").alt = this._name;
+    this._cardElement.id = this._id;
+
     this._setEventListeners();
 
     return this._cardElement;

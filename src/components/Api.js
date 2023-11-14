@@ -52,6 +52,32 @@ export default class Api {
       });
   }
 
+  editProfilePic(newAvatar) {
+    return fetch(`${this.baseUrl}/v1/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: newAvatar,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        console.error("An error occured:", error);
+        return Promise.reject(error);
+      });
+  }
+
   createNewCard(cardName, cardLink) {
     return fetch(`${this.baseUrl}/v1/cards`, {
       method: "POST",
@@ -79,7 +105,7 @@ export default class Api {
       });
   }
 
-  deleteCard(cardId) {
+  deleteApiCard(cardId) {
     return fetch(`${this.baseUrl}/v1/cards/${cardId}`, {
       method: "DELETE",
       headers: {

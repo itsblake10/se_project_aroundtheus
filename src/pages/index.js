@@ -59,6 +59,8 @@ function createCard(items) {
   ) {
     confirmPopup.openPopup();
     confirmPopup.handleConfirm(function () {
+      const cardId = items._id;
+      newApi.deleteApiCard(cardId).then(card);
       card.deleteCard();
     });
   });
@@ -183,23 +185,5 @@ profileEditPictureButton.addEventListener("click", () => {
   changeProfilePictureFormValidator.toggleButtonState();
   editProfilePictureModal.openPopup();
 });
-
-/* -------------------------------------------------------------------------- */
-/*                                     API                                    */
-/* -------------------------------------------------------------------------- */
-
-// fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
-//   method: "GET",
-//   headers: {
-//     authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
-//   },
-// })
-//   .then((res) => res.json())
-//   .then((data) => {
-//     console.log(data);
-//   })
-//   .catch((error) => {
-//     console.error("Error:", error);
-//   });
 
 /* ------------------------------------ X ----------------------------------- */
