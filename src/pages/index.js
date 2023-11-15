@@ -142,6 +142,12 @@ profileEditButton.addEventListener("click", () => {
   editProfileModal.openPopup();
 });
 
+newApi.getProfileData().then((data) => {
+  profileTitle.textContent = data.name;
+  profileDescription.textContent = data.about;
+  profilePicture.src = data.avatar;
+});
+
 /* -------------------------------- ADD CARD MODAL ------------------------------- */
 const addProfileModal = new PopupWithForm(
   "#profile-add-modal",
@@ -174,8 +180,9 @@ imagePreviewModal.setEventListeners();
 const editProfilePictureModal = new PopupWithForm(
   "#profile-picture-modal",
   (inputValues) => {
-    const newProfilePicture = { link: inputValues.link };
-    profilePicture.src = newProfilePicture.link;
+    newApi.editProfilePic(inputValues.link).then((data) => {
+      profilePicture.src = data.avatar;
+    });
   }
 );
 

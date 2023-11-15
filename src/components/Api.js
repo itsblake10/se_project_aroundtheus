@@ -3,11 +3,39 @@ export default class Api {
     this.baseUrl = baseUrl;
   }
 
+  getProfileData() {
+    return fetch(`${this.baseUrl}/v1/users/me`, {
+      method: "GET",
+      headers: {
+        authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
+      },
+      // body: JSON.stringify({
+      //   name: profileName,
+      //   about: profileAbout,
+      //   avatar: sda,
+      //   _id: sdfsdf,
+      // }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        console.error("An error occured:", error);
+        return Promise.reject(error);
+      });
+  }
+
   getInitialCards() {
     return fetch(`${this.baseUrl}/v1/cards`, {
       method: "GET",
       headers: {
-        authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+        authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
       },
     })
       .then((res) => {
@@ -29,7 +57,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/v1/users/me`, {
       method: "PATCH",
       headers: {
-        authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+        authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -53,10 +81,10 @@ export default class Api {
   }
 
   editProfilePic(newAvatar) {
-    return fetch(`${this.baseUrl}/v1/users/me`, {
+    return fetch(`${this.baseUrl}/v1/users/me/avatar`, {
       method: "PATCH",
       headers: {
-        authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+        authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -82,7 +110,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/v1/cards`, {
       method: "POST",
       headers: {
-        authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+        authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -109,7 +137,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/v1/cards/${cardId}`, {
       method: "DELETE",
       headers: {
-        authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+        authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
         "Content-Type": "application/json",
       },
     })
@@ -132,8 +160,21 @@ export default class Api {
     return fetch(`${this.baseUrl}/v1/cards/${cardId}/likes`, {
       method: "PUT",
       headers: {
-        authorization: "74d9af6b-378b-4926-b030-13bc7ddfd7d9",
+        authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
       },
-    });
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        console.error("An error occured:", error);
+        return Promise.reject(error);
+      });
   }
 }
