@@ -80,3 +80,8 @@ export const deleteCardModal = document.querySelector("#confirm-modal");
 export const confirmDeleteButton = document.querySelector(
   ".modal-confirm__submit-button"
 );
+export const cardLikeIcon = document.querySelector(".gallery__like-button");
+
+export const modal = document.querySelector(".modal");
+
+export const submitButton = modal.querySelector(".modal__submit-button");

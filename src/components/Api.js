@@ -9,12 +9,6 @@ export default class Api {
       headers: {
         authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
       },
-      // body: JSON.stringify({
-      //   name: profileName,
-      //   about: profileAbout,
-      //   avatar: sda,
-      //   _id: sdfsdf,
-      // }),
     })
       .then((res) => {
         if (!res.ok) {
@@ -161,6 +155,29 @@ export default class Api {
       method: "PUT",
       headers: {
         authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        console.error("An error occured:", error);
+        return Promise.reject(error);
+      });
+  }
+
+  removeLike(cardId) {
+    return fetch(`${this.baseUrl}/v1/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
+        "Content-Type": "application/json",
       },
     })
       .then((res) => {

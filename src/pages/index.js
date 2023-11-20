@@ -39,7 +39,10 @@ import {
 } from "../utils/Constants.js";
 
 /* ----------------------------------- GRID/CARDS ---------------------------------- */
-import { cardDeleteButton, confirmDeleteButton } from "../utils/Constants.js";
+import { cardLikeIcon } from "../utils/Constants.js";
+
+/* ---------------------------------- Modal --------------------------------- */
+import { submitButton } from "../utils/Constants.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
@@ -54,16 +57,39 @@ const confirmPopup = new PopupConfirm("#confirm-modal");
 confirmPopup.setEventListeners();
 
 function createCard(items) {
-  const card = new Card("#card-template", items, handleCardClick, function (
-    card
-  ) {
-    confirmPopup.openPopup();
-    confirmPopup.handleConfirm(function () {
+  const card = new Card(
+    "#card-template",
+    items,
+    handleCardClick,
+    function (card) {
+      confirmPopup.openPopup();
+      confirmPopup.handleConfirm(function () {
+        const cardId = items._id;
+        newApi.deleteApiCard(cardId).then(card);
+        card.deleteCard();
+      });
+    },
+    function (card) {
       const cardId = items._id;
-      newApi.deleteApiCard(cardId).then(card);
-      card.deleteCard();
-    });
-  });
+      if (items.isLiked === false) {
+        newApi
+          .addLike(cardId)
+          .then(card)
+          .then(() => {
+            card.toggleLike();
+            items.isLiked = true;
+          });
+      } else {
+        newApi
+          .removeLike(cardId)
+          .then(card)
+          .then(() => {
+            card.toggleLike();
+            items.isLiked = false;
+          });
+      }
+    }
+  );
 
   const cardElement = card.getTemplate();
 
@@ -115,11 +141,18 @@ changeProfilePictureFormValidator.enableValidation();
 const userProfile = new UserInfo(profileTitle, profileDescription);
 
 /* --------------------------------- #MODALS# --------------------------------- */
+function ButtonLoading() {
+  submitButton.textContent = "Loading...";
+  setTimeout(() => {
+    submitButton.textContent = "Save";
+  }, 1000);
+}
 
 /* ------------------------------- EDIT PROFILE MODAL------------------------------- */
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
   (inputValues) => {
+    ButtonLoading();
     newApi
       .editProfile(inputValues.name, inputValues.description)
       .then((newProfileData) => {
@@ -152,6 +185,7 @@ newApi.getProfileData().then((data) => {
 const addProfileModal = new PopupWithForm(
   "#profile-add-modal",
   (inputValues) => {
+    ButtonLoading();
     newApi
       .createNewCard(inputValues.title, inputValues.link)
       .then((newCardData) => {
@@ -180,6 +214,7 @@ imagePreviewModal.setEventListeners();
 const editProfilePictureModal = new PopupWithForm(
   "#profile-picture-modal",
   (inputValues) => {
+    ButtonLoading();
     newApi.editProfilePic(inputValues.link).then((data) => {
       profilePicture.src = data.avatar;
     });
