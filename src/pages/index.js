@@ -165,14 +165,6 @@ changeProfilePictureFormValidator.enableValidation();
 /* -------------------------------- USER INFO ------------------------------- */
 const userProfile = new UserInfo(profileTitle, profileDescription);
 
-/* --------------------------------- #MODALS# --------------------------------- */
-// function buttonLoading() {
-//   submitButton.textContent = "Saving...";
-//   setTimeout(() => {
-//     submitButton.textContent = "Save";
-//   }, 1000);
-// }
-
 /* ------------------------------- EDIT PROFILE MODAL------------------------------- */
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
@@ -184,6 +176,7 @@ const editProfileModal = new PopupWithForm(
         userProfile.setUserInfo({
           userTitle: newProfileData.name,
           userDescription: newProfileData.about,
+          userAvatar: newProfileData.avatar,
         });
         editProfileModal.closePopup();
       })
