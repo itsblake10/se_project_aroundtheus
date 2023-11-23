@@ -45,7 +45,6 @@ export default class Card {
     this._cardElement.querySelector(".gallery__image").src = this._link;
     this._cardElement.querySelector(".gallery__image").alt = this._name;
     this._cardElement.id = this._id;
-    console.log(this.items);
 
     if (this._isLiked) {
       this._cardElement

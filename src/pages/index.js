@@ -38,9 +38,6 @@ import {
   profileEditPictureButton,
 } from "../utils/Constants.js";
 
-/* ----------------------------------- GRID/CARDS ---------------------------------- */
-import { cardLikeIcon } from "../utils/Constants.js";
-
 /* ---------------------------------- Modal --------------------------------- */
 import { submitButton } from "../utils/Constants.js";
 
@@ -48,9 +45,13 @@ import { submitButton } from "../utils/Constants.js";
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 
-const apiUrl = "https://around-api.en.tripleten-services.com";
-
-const newApi = new Api(apiUrl);
+const newApi = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com",
+  headers: {
+    authorization: "177c16b7-240f-4206-a2e5-5bd359c96b1d",
+    "Content-Type": "application/json",
+  },
+});
 
 const confirmPopup = new PopupConfirm("#confirm-modal");
 
@@ -64,9 +65,19 @@ function createCard(items) {
     function (card) {
       confirmPopup.openPopup();
       confirmPopup.handleConfirm(function () {
+        confirmPopup.handleButtonLoading();
         const cardId = items._id;
-        newApi.deleteApiCard(cardId).then(card);
-        card.deleteCard();
+        newApi
+          .deleteApiCard(cardId)
+          .then(card)
+          .then(() => {
+            card.deleteCard();
+            confirmPopup.closePopup(); //this in a different then() block??//
+          })
+          .catch((error) => {
+            console.error("An error occured:", error);
+            return Promise.reject(error);
+          });
       });
     },
     function (card) {
@@ -78,6 +89,10 @@ function createCard(items) {
           .then(() => {
             card.toggleLike();
             items.isLiked = true;
+          })
+          .catch((error) => {
+            console.error("An error occured:", error);
+            return Promise.reject(error);
           });
       } else {
         newApi
@@ -86,6 +101,10 @@ function createCard(items) {
           .then(() => {
             card.toggleLike();
             items.isLiked = false;
+          })
+          .catch((error) => {
+            console.error("An error occured:", error);
+            return Promise.reject(error);
           });
       }
     }
@@ -111,9 +130,15 @@ const homeSection = new Section(
   ".gallery__cards"
 );
 
-newApi.getInitialCards().then((data) => {
-  homeSection.renderItems(data.reverse());
-});
+newApi
+  .getInitialCards()
+  .then((data) => {
+    homeSection.renderItems(data.reverse());
+  })
+  .catch((error) => {
+    console.error("An error occured:", error);
+    return Promise.reject(error);
+  });
 
 /* ----------------------------- FORM VALIDATOR ----------------------------- */
 const editProfileFormValidator = new FormValidator(
@@ -141,18 +166,18 @@ changeProfilePictureFormValidator.enableValidation();
 const userProfile = new UserInfo(profileTitle, profileDescription);
 
 /* --------------------------------- #MODALS# --------------------------------- */
-function ButtonLoading() {
-  submitButton.textContent = "Loading...";
-  setTimeout(() => {
-    submitButton.textContent = "Save";
-  }, 1000);
-}
+// function buttonLoading() {
+//   submitButton.textContent = "Saving...";
+//   setTimeout(() => {
+//     submitButton.textContent = "Save";
+//   }, 1000);
+// }
 
 /* ------------------------------- EDIT PROFILE MODAL------------------------------- */
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
   (inputValues) => {
-    ButtonLoading();
+    editProfileModal.handleButtonLoading();
     newApi
       .editProfile(inputValues.name, inputValues.description)
       .then((newProfileData) => {
@@ -160,6 +185,11 @@ const editProfileModal = new PopupWithForm(
           userTitle: newProfileData.name,
           userDescription: newProfileData.about,
         });
+        editProfileModal.closePopup();
+      })
+      .catch((error) => {
+        console.error("An error occured:", error);
+        return Promise.reject(error);
       });
   }
 );
@@ -175,22 +205,33 @@ profileEditButton.addEventListener("click", () => {
   editProfileModal.openPopup();
 });
 
-newApi.getProfileData().then((data) => {
-  profileTitle.textContent = data.name;
-  profileDescription.textContent = data.about;
-  profilePicture.src = data.avatar;
-});
+newApi
+  .getProfileData()
+  .then((data) => {
+    profileTitle.textContent = data.name;
+    profileDescription.textContent = data.about;
+    profilePicture.src = data.avatar;
+  })
+  .catch((error) => {
+    console.error("An error occured:", error);
+    return Promise.reject(error);
+  });
 
 /* -------------------------------- ADD CARD MODAL ------------------------------- */
 const addProfileModal = new PopupWithForm(
   "#profile-add-modal",
   (inputValues) => {
-    ButtonLoading();
+    addProfileModal.handleButtonLoading();
     newApi
       .createNewCard(inputValues.title, inputValues.link)
       .then((newCardData) => {
         const cardElement = createCard(newCardData);
         homeSection.addItem(cardElement);
+        addProfileModal.closePopup();
+      })
+      .catch((error) => {
+        console.error("An error occured:", error);
+        return Promise.reject(error);
       });
   }
 );
@@ -214,10 +255,17 @@ imagePreviewModal.setEventListeners();
 const editProfilePictureModal = new PopupWithForm(
   "#profile-picture-modal",
   (inputValues) => {
-    ButtonLoading();
-    newApi.editProfilePic(inputValues.link).then((data) => {
-      profilePicture.src = data.avatar;
-    });
+    editProfilePictureModal.handleButtonLoading();
+    newApi
+      .editProfilePic(inputValues.link)
+      .then((data) => {
+        profilePicture.src = data.avatar;
+        editProfilePictureModal.closePopup();
+      })
+      .catch((error) => {
+        console.error("An error occured:", error);
+        return Promise.reject(error);
+      });
   }
 );
 
