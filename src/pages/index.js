@@ -65,14 +65,14 @@ function createCard(items) {
     function (card) {
       confirmPopup.openPopup();
       confirmPopup.handleConfirm(function () {
-        confirmPopup.handleButtonLoading();
+        confirmPopup.handleButtonLoading(true);
         const cardId = items._id;
         newApi
           .deleteApiCard(cardId)
-          .then(card)
           .then(() => {
             card.deleteCard();
             confirmPopup.closePopup();
+            confirmPopup.handleButtonLoading(false);
           })
           .catch((error) => {
             console.error("An error occured:", error);
@@ -85,7 +85,6 @@ function createCard(items) {
       if (items.isLiked === false) {
         newApi
           .addLike(cardId)
-          .then(card)
           .then(() => {
             card.toggleLike();
             items.isLiked = true;
@@ -97,7 +96,6 @@ function createCard(items) {
       } else {
         newApi
           .removeLike(cardId)
-          .then(card)
           .then(() => {
             card.toggleLike();
             items.isLiked = false;
@@ -173,7 +171,7 @@ const userProfile = new UserInfo(
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
   (inputValues) => {
-    editProfileModal.handleButtonLoading();
+    editProfileModal.handleButtonLoading(true);
     newApi
       .editProfile(inputValues.name, inputValues.description)
       .then((newProfileData) => {
@@ -182,6 +180,8 @@ const editProfileModal = new PopupWithForm(
           userDescription: newProfileData.about,
         });
         editProfileModal.closePopup();
+        editProfileModal.handleButtonLoading(false);
+        editProfileFormValidator.toggleButtonState();
       })
       .catch((error) => {
         console.error("An error occured:", error);
@@ -219,13 +219,15 @@ newApi
 const addProfileModal = new PopupWithForm(
   "#profile-add-modal",
   (inputValues) => {
-    addProfileModal.handleButtonLoading();
+    addProfileModal.handleButtonLoading(true);
     newApi
       .createNewCard(inputValues.title, inputValues.link)
       .then((newCardData) => {
         const cardElement = createCard(newCardData);
         homeSection.addItem(cardElement);
         addProfileModal.closePopup();
+        addProfileModal.handleButtonLoading(false);
+        addProfileFormValidator.toggleButtonState();
       })
       .catch((error) => {
         console.error("An error occured:", error);
@@ -253,12 +255,14 @@ imagePreviewModal.setEventListeners();
 const editProfilePictureModal = new PopupWithForm(
   "#profile-picture-modal",
   (inputValues) => {
-    editProfilePictureModal.handleButtonLoading();
+    editProfilePictureModal.handleButtonLoading(true);
     newApi
       .editProfilePic(inputValues.link)
       .then((data) => {
         userProfile.setUserAvatar(data.avatar);
         editProfilePictureModal.closePopup();
+        editProfilePictureModal.handleButtonLoading(false);
+        changeProfilePictureFormValidator.toggleButtonState();
       })
       .catch((error) => {
         console.error("An error occured:", error);

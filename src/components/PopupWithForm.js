@@ -14,11 +14,12 @@ export default class PopupWithForm extends Popup {
     super.closePopup();
   }
 
-  handleButtonLoading() {
-    this._submitButton.textContent = "Saving...";
-    setTimeout(() => {
+  handleButtonLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Saving...";
+    } else {
       this._submitButton.textContent = "Save";
-    }, 1000);
+    }
   }
 
   _getInputValues() {
