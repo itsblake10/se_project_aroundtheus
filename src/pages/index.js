@@ -72,7 +72,7 @@ function createCard(items) {
           .then(card)
           .then(() => {
             card.deleteCard();
-            confirmPopup.closePopup(); //this in a different then() block??//
+            confirmPopup.closePopup();
           })
           .catch((error) => {
             console.error("An error occured:", error);
@@ -163,7 +163,11 @@ const changeProfilePictureFormValidator = new FormValidator(
 changeProfilePictureFormValidator.enableValidation();
 
 /* -------------------------------- USER INFO ------------------------------- */
-const userProfile = new UserInfo(profileTitle, profileDescription);
+const userProfile = new UserInfo(
+  profileTitle,
+  profileDescription,
+  profilePicture
+);
 
 /* ------------------------------- EDIT PROFILE MODAL------------------------------- */
 const editProfileModal = new PopupWithForm(
@@ -176,7 +180,6 @@ const editProfileModal = new PopupWithForm(
         userProfile.setUserInfo({
           userTitle: newProfileData.name,
           userDescription: newProfileData.about,
-          userAvatar: newProfileData.avatar,
         });
         editProfileModal.closePopup();
       })
@@ -201,9 +204,11 @@ profileEditButton.addEventListener("click", () => {
 newApi
   .getProfileData()
   .then((data) => {
-    profileTitle.textContent = data.name;
-    profileDescription.textContent = data.about;
-    profilePicture.src = data.avatar;
+    userProfile.setUserInfo({
+      userTitle: data.name,
+      userDescription: data.about,
+    });
+    userProfile.setUserAvatar(data.avatar);
   })
   .catch((error) => {
     console.error("An error occured:", error);
@@ -252,7 +257,7 @@ const editProfilePictureModal = new PopupWithForm(
     newApi
       .editProfilePic(inputValues.link)
       .then((data) => {
-        profilePicture.src = data.avatar;
+        userProfile.setUserAvatar(data.avatar);
         editProfilePictureModal.closePopup();
       })
       .catch((error) => {
