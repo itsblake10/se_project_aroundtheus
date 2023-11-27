@@ -82,7 +82,6 @@ class FormValidator {
     this._setEventListeners();
     this._formEl.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.toggleButtonState();
     });
   }
 }

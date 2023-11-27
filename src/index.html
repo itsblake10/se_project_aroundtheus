@@ -28,11 +28,21 @@
       <main class="content">
         <!-- ------------------------------- PROFILE ------------------------------- -->
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="profile image"
-            class="profile__image"
-          />
+          <div class="profile__image-container">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="profile image"
+              class="profile__image"
+            />
+            <button class="profile__edit-image-button">
+              <img
+                src="<%=require('./images/profile-edit-icon.svg')%>"
+                alt="edit profile icon"
+                class="profile__edit-image-icon"
+              />
+              <div class="profile__image-overlay"></div>
+            </button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -65,7 +75,7 @@
     <!--                                 MODALS                                  -->
     <!-- ----------------------------------------------------------------------- -->
 
-    <!-- ----------------------------- EDIT MODAL ------------------------------ -->
+    <!-- ----------------------------- EDIT PROFILE MODAL ------------------------------ -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button
@@ -105,7 +115,7 @@
       </div>
     </div>
 
-    <!-- ------------------------------ ADD MODAL ------------------------------ -->
+    <!-- ------------------------------ ADD CARD MODAL ------------------------------ -->
     <div class="modal" id="profile-add-modal">
       <div class="modal__container">
         <button
@@ -146,7 +156,7 @@
       </div>
     </div>
 
-    <!-- ---------------------------- IMAGE MODAL ---------------------------- -->
+    <!-- ---------------------------- PREVIEW IMAGE MODAL ---------------------------- -->
     <div class="modal" id="image-modal">
       <div class="modal__container-image">
         <button
@@ -156,6 +166,57 @@
         ></button>
         <img src="#" alt="" class="modal__image-preview" />
         <p class="modal__image-text"></p>
+      </div>
+    </div>
+
+    <!-- ---------------------------- CONFIRM MODAL ---------------------------- -->
+    <div class="modal" id="confirm-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close-button"
+          id="modal-confirm-close-button"
+          type="button"
+        ></button>
+        <h2 class="modal-confirm__heading">Are you sure?</h2>
+        <button
+          class="modal__submit-button modal-confirm__submit-button"
+          id="modal-confirm-submit-button"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+
+    <!-- -------------------- CHANGE PROFILE PICTURE MODAL --------------------- -->
+    <div class="modal" id="profile-picture-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close-button"
+          id="modal-profile-picture-close-button"
+          type="button"
+        ></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" id="modal-profile-picture-form">
+          <input
+            type="url"
+            name="link"
+            id="profile-picture-url-input"
+            class="modal__input"
+            placeholder="Image link"
+            required
+          />
+          <span
+            class="modal__error"
+            id="profile-picture-url-input-error"
+          ></span>
+          <button
+            class="modal__submit-button modal__submit-button_disabled"
+            id="modal-profile-picture-submit-button"
+            type="submit"
+          >
+            Save
+          </button>
+        </form>
       </div>
     </div>
 
