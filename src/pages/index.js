@@ -72,11 +72,12 @@ function createCard(items) {
           .then(() => {
             card.deleteCard();
             confirmPopup.closePopup();
-            confirmPopup.handleButtonLoading(false);
           })
           .catch((error) => {
             console.error("An error occured:", error);
-            return Promise.reject(error);
+          })
+          .finally(() => {
+            confirmPopup.handleButtonLoading(false);
           });
       });
     },
@@ -91,7 +92,6 @@ function createCard(items) {
           })
           .catch((error) => {
             console.error("An error occured:", error);
-            return Promise.reject(error);
           });
       } else {
         newApi
@@ -102,7 +102,6 @@ function createCard(items) {
           })
           .catch((error) => {
             console.error("An error occured:", error);
-            return Promise.reject(error);
           });
       }
     }
@@ -135,7 +134,6 @@ newApi
   })
   .catch((error) => {
     console.error("An error occured:", error);
-    return Promise.reject(error);
   });
 
 /* ----------------------------- FORM VALIDATOR ----------------------------- */
@@ -180,12 +178,13 @@ const editProfileModal = new PopupWithForm(
           userDescription: newProfileData.about,
         });
         editProfileModal.closePopup();
-        editProfileModal.handleButtonLoading(false);
         editProfileFormValidator.toggleButtonState();
       })
       .catch((error) => {
         console.error("An error occured:", error);
-        return Promise.reject(error);
+      })
+      .finally(() => {
+        editProfileModal.handleButtonLoading(false);
       });
   }
 );
@@ -212,7 +211,6 @@ newApi
   })
   .catch((error) => {
     console.error("An error occured:", error);
-    return Promise.reject(error);
   });
 
 /* -------------------------------- ADD CARD MODAL ------------------------------- */
@@ -226,12 +224,13 @@ const addProfileModal = new PopupWithForm(
         const cardElement = createCard(newCardData);
         homeSection.addItem(cardElement);
         addProfileModal.closePopup();
-        addProfileModal.handleButtonLoading(false);
         addProfileFormValidator.toggleButtonState();
       })
       .catch((error) => {
         console.error("An error occured:", error);
-        return Promise.reject(error);
+      })
+      .finally(() => {
+        addProfileModal.handleButtonLoading(false);
       });
   }
 );
@@ -261,12 +260,13 @@ const editProfilePictureModal = new PopupWithForm(
       .then((data) => {
         userProfile.setUserAvatar(data.avatar);
         editProfilePictureModal.closePopup();
-        editProfilePictureModal.handleButtonLoading(false);
         changeProfilePictureFormValidator.toggleButtonState();
       })
       .catch((error) => {
         console.error("An error occured:", error);
-        return Promise.reject(error);
+      })
+      .finally(() => {
+        editProfilePictureModal.handleButtonLoading(false);
       });
   }
 );

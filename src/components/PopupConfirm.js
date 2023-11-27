@@ -7,17 +7,19 @@ export default class PopupConfirm extends Popup {
       ".modal-confirm__submit-button"
     );
     this._submitButton = this._modal.querySelector(".modal__submit-button");
+    this._submitButtonText = this._submitButton.textContent;
   }
 
   handleConfirm(action) {
     this._handleConfirmDelete = action;
   }
 
-  handleButtonLoading() {
-    this._submitButton.textContent = "Saving...";
-    setTimeout(() => {
-      this._submitButton.textContent = "Save";
-    }, 1000);
+  handleButtonLoading(isLoading, loadingText = "Saving...") {
+    if (isLoading) {
+      this._submitButton.textContent = loadingText;
+    } else {
+      this._submitButton.textContent = this._submitButtonText;
+    }
   }
 
   setEventListeners() {
