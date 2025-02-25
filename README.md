@@ -2,7 +2,7 @@
 
 # Overview
 
-In this project i have followed the specs on a Figma file to create a responsive website using grid layout to fit different resolutions/devices including tablets and mobiles.
+In this project i have followed the specs on a Figma file to create a responsive website using grid layout to fit different resolutions/devices including tablets and mobiles, I also made it responsive with Javascript.
 
 ## Project features
 
@@ -10,12 +10,13 @@ In this project i have followed the specs on a Figma file to create a responsive
 - Responsive CSS
 - Grid layout
 - Flexbox
-- Flat BEM
+- Made interactive with Javascript
 
 ## Languages used
 
 - HTML
 - CSS
+- Javascript
 
 ## Link to project
 

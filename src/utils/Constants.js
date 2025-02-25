@@ -47,11 +47,17 @@ export const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 export const profileEditForm = document.querySelector("#modal-edit-form");
+export const profilePicture = document.querySelector(".profile__image");
+export const profilePictureModal = document.querySelector(
+  "#profile-picture-modal"
+);
+export const profileEditPictureButton = document.querySelector(
+  ".profile__edit-image-button"
+);
 
 /* -------------------------------- ADD CARD -------------------------------- */
 
 export const closeButton = document.querySelector(".modal__close-button");
-
 export const profileAddModal = document.querySelector("#profile-add-modal");
 export const profileAddButton = document.querySelector("#profile-add-button");
 export const profileAddForm = document.querySelector("#modal-add-form");
@@ -67,3 +73,15 @@ export const modalImageCloseButton = document.querySelector(
 /* ----------------------------------- GRID/CARDS ---------------------------------- */
 
 export const galleryListEl = document.querySelector(".gallery__cards");
+export const cardDeleteButton = document.querySelector(
+  ".gallery__delete-button"
+);
+export const deleteCardModal = document.querySelector("#confirm-modal");
+export const confirmDeleteButton = document.querySelector(
+  ".modal-confirm__submit-button"
+);
+export const cardLikeIcon = document.querySelector(".gallery__like-button");
+
+export const modal = document.querySelector(".modal");
+
+export const submitButton = modal.querySelector(".modal__submit-button");
